@@ -1,0 +1,29 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{0C6210AC-03DF-752E-C834-43F236CDBAE7}") = "etihad-vr-app", "Assembly-CSharp-firstpass.csproj", "{FD2903BC-C3F9-397C-DA27-7DCC04152246}"
+EndProject
+Project("{0C6210AC-03DF-752E-C834-43F236CDBAE7}") = "etihad-vr-app", "Assembly-CSharp.csproj", "{4A66ABE7-408C-5129-8D9D-7F2EFB73C8DE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FD2903BC-C3F9-397C-DA27-7DCC04152246}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD2903BC-C3F9-397C-DA27-7DCC04152246}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD2903BC-C3F9-397C-DA27-7DCC04152246}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD2903BC-C3F9-397C-DA27-7DCC04152246}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A66ABE7-408C-5129-8D9D-7F2EFB73C8DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A66ABE7-408C-5129-8D9D-7F2EFB73C8DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A66ABE7-408C-5129-8D9D-7F2EFB73C8DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A66ABE7-408C-5129-8D9D-7F2EFB73C8DE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal

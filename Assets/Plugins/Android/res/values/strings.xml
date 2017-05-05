@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="error_no_download_item">No download item exists.</string>
+	<string name="error_download_url">Please provide correct download url.</string>
+    <string name="error_sdcard">External (emulated) storage is not available.</string>
+    <string name="status_downloading">Downloading.</string>
+    <string name="status_downloded">Downloaded.</string>
+    <string name="status_downloded_already">File already exists.</string>
+    <string name="status_fail_cannot_resume">Cannot resume download.</string>
+    <string name="status_fail_device_not_found">Device not found.</string>
+    <string name="status_fail_file_error">File error.</string>
+    <string name="status_fail_space">Not enough space.</string>
+    <string name="status_fail_other">Unknown error.</string>
+    <string name="status_fail_network">Network error.</string>
+    <string name="status_deleted">Deleted.</string>
+    <string name="status_canceled">Canceled all downloads.</string>
+    <string name="notification_complete">Download Complete.</string>
+</resources>

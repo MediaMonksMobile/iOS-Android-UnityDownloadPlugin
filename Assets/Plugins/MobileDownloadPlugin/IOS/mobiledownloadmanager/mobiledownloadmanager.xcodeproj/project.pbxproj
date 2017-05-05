@@ -1,0 +1,292 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C4E445E84FB4E4E5100C4BE2 /* WMLSwizzler.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E444E411AD5F4143B43A37 /* WMLSwizzler.m */; };
+		C4E447BA2E84F9EC59B9E08A /* FileDownloadInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E4437C53A090F72FCBC863 /* FileDownloadInfo.m */; };
+		DC03E7F41CBE914100F04163 /* mobiledownloadmanager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = DC03E7F31CBE914100F04163 /* mobiledownloadmanager.h */; };
+		DC03E7F61CBE914100F04163 /* mobiledownloadmanager.mm in Sources */ = {isa = PBXBuildFile; fileRef = DC03E7F51CBE914100F04163 /* mobiledownloadmanager.mm */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DC03E7EE1CBE914100F04163 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				DC03E7F41CBE914100F04163 /* mobiledownloadmanager.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		C4E4437C53A090F72FCBC863 /* FileDownloadInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileDownloadInfo.m; sourceTree = "<group>"; };
+		C4E444E411AD5F4143B43A37 /* WMLSwizzler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMLSwizzler.m; sourceTree = "<group>"; };
+		C4E444ED4D2EAEE205ACFDA0 /* FileDownloadInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileDownloadInfo.h; sourceTree = "<group>"; };
+		C4E44964DCDFB0F08239D601 /* WMLSwizzler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMLSwizzler.h; sourceTree = "<group>"; };
+		DC03E7F01CBE914100F04163 /* libmobiledownloadmanager.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libmobiledownloadmanager.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC03E7F31CBE914100F04163 /* mobiledownloadmanager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mobiledownloadmanager.h; sourceTree = "<group>"; };
+		DC03E7F51CBE914100F04163 /* mobiledownloadmanager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = mobiledownloadmanager.mm; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DC03E7ED1CBE914100F04163 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C4E44D5EF115DAB6B64DA080 /* Abstraction */ = {
+			isa = PBXGroup;
+			children = (
+				C4E4437C53A090F72FCBC863 /* FileDownloadInfo.m */,
+				C4E444ED4D2EAEE205ACFDA0 /* FileDownloadInfo.h */,
+				C4E44964DCDFB0F08239D601 /* WMLSwizzler.h */,
+				C4E444E411AD5F4143B43A37 /* WMLSwizzler.m */,
+			);
+			path = Abstraction;
+			sourceTree = "<group>";
+		};
+		DC03E7E71CBE914100F04163 = {
+			isa = PBXGroup;
+			children = (
+				DC03E7F21CBE914100F04163 /* mobiledownloadmanager */,
+				DC03E7F11CBE914100F04163 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DC03E7F11CBE914100F04163 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DC03E7F01CBE914100F04163 /* libmobiledownloadmanager.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DC03E7F21CBE914100F04163 /* mobiledownloadmanager */ = {
+			isa = PBXGroup;
+			children = (
+				DC03E7F31CBE914100F04163 /* mobiledownloadmanager.h */,
+				DC03E7F51CBE914100F04163 /* mobiledownloadmanager.mm */,
+				C4E44D5EF115DAB6B64DA080 /* Abstraction */,
+			);
+			path = mobiledownloadmanager;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DC03E7EF1CBE914100F04163 /* mobiledownloadmanager */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DC03E7F91CBE914100F04163 /* Build configuration list for PBXNativeTarget "mobiledownloadmanager" */;
+			buildPhases = (
+				DC03E7EC1CBE914100F04163 /* Sources */,
+				DC03E7ED1CBE914100F04163 /* Frameworks */,
+				DC03E7EE1CBE914100F04163 /* CopyFiles */,
+				DC03E7FE1CBE94C300F04163 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = mobiledownloadmanager;
+			productName = mobiledownloadmanager;
+			productReference = DC03E7F01CBE914100F04163 /* libmobiledownloadmanager.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DC03E7E81CBE914100F04163 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = MediaMonks;
+				TargetAttributes = {
+					DC03E7EF1CBE914100F04163 = {
+						CreatedOnToolsVersion = 7.3;
+					};
+				};
+			};
+			buildConfigurationList = DC03E7EB1CBE914100F04163 /* Build configuration list for PBXProject "mobiledownloadmanager" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = DC03E7E71CBE914100F04163;
+			productRefGroup = DC03E7F11CBE914100F04163 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DC03E7EF1CBE914100F04163 /* mobiledownloadmanager */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		DC03E7FE1CBE94C300F04163 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cp ${CODESIGNING_FOLDER_PATH} ${SRCROOT}";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DC03E7EC1CBE914100F04163 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC03E7F61CBE914100F04163 /* mobiledownloadmanager.mm in Sources */,
+				C4E447BA2E84F9EC59B9E08A /* FileDownloadInfo.m in Sources */,
+				C4E445E84FB4E4E5100C4BE2 /* WMLSwizzler.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		DC03E7F71CBE914100F04163 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		DC03E7F81CBE914100F04163 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DC03E7FA1CBE914100F04163 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		DC03E7FB1CBE914100F04163 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DC03E7EB1CBE914100F04163 /* Build configuration list for PBXProject "mobiledownloadmanager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC03E7F71CBE914100F04163 /* Debug */,
+				DC03E7F81CBE914100F04163 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DC03E7F91CBE914100F04163 /* Build configuration list for PBXNativeTarget "mobiledownloadmanager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC03E7FA1CBE914100F04163 /* Debug */,
+				DC03E7FB1CBE914100F04163 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DC03E7E81CBE914100F04163 /* Project object */;
+}
