@@ -27,7 +27,7 @@ public class MobileDownloadManager : Singleton<MobileDownloadManager>
 
 		[DllImport("__Internal")]
 		public static extern void downloadFile(string url);
-
+		
 		[DllImport("__Internal")]
 		public static extern void downloadFiles(string[] urls, int count);
 
@@ -88,6 +88,7 @@ public class MobileDownloadManager : Singleton<MobileDownloadManager>
 		#if UNITY_ANDROID
 
 		#elif UNITY_IOS
+
 		Debug.Log("iOS Configure With wifi Options & max connections");
 
 		configure(wifi, maxConnections);

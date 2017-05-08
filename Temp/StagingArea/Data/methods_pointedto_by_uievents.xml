@@ -1,0 +1,17 @@
+<linker>
+	<assembly fullname="Assembly-CSharp">
+		<type fullname="TestSceneManager">
+			<method name="PauseSingleDownload"/>
+			<method name="LoadFile"/>
+			<method name="CancelDownloads"/>
+			<method name="ResumeDownloads"/>
+			<method name="PauseDownloads"/>
+			<method name="DeleteFile"/>
+			<method name="LoadFiles"/>
+			<method name="ResumeSingleDownload"/>
+			<method name="DeleteFiles"/>
+			<method name="CancelSingleDownload"/>
+			<method name="OnlyWifiSwitch"/>
+		</type>
+	</assembly>
+</linker>

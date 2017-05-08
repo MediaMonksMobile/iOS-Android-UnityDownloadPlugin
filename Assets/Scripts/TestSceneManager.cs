@@ -41,14 +41,17 @@ public class TestSceneManager : MonoBehaviour {
 
 	void Start () {
 
-		// Configure Method calls a instancetype for configuring HTTOMaxConnectionsPerHost
+		/* Configure Method calls a instancetype for configuring HTTPMaxConnectionsPerHost and OnlyWifi enabled
+		* @param(integer) for applying the HTTPMaxConnectionsPerHost
+		* @param(bool) for applying the OnlyWifi enabling
+		*/
 		MobileDownloadManager.Instance.Configure (true, 1);
 
 		//Get language of the device.
 		Debug.Log("Locale: " + MobileDownloadManager.Instance.GetCurrentLocale());
 
 		//Get current user (download over wifi) preference .
-		onlyWifi = MobileDownloadManager.Instance.IsWifiOnly();
+//		onlyWifi = MobileDownloadManager.Instance.IsWifiOnly();
 		cellularButtonText.text = "Only over WiFI: " + onlyWifi;
 
 		// Subscribe for different events.
