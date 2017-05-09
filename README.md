@@ -44,6 +44,15 @@ Delete download:
 
 ## Updates
 
+### 1.1
+
+#### iOS Plugin
+- Added Single Notifications;
+- Refactoring.
+
+#### Unity UI
+- Removed unnecessary code.
+
 ### 1.0
 
 #### iOS Plugin
