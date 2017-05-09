@@ -13848,6 +13848,7 @@ extern const Il2CppType SetPropertyUtility_SetClass_m230854526_gp_0_0_0_0 = { (v
 
 extern const Il2CppType Slider_t297367283_0_0_0 = { (void*)1634, 0, IL2CPP_TYPE_CLASS, 0, 0, 0 };
 extern const Il2CppType Slider_t297367283_1_0_0 = { (void*)1634, 0, IL2CPP_TYPE_CLASS, 0, 1, 0 };
+extern const Il2CppType Slider_t297367283_0_0_6 = { (void*)1634, 6, IL2CPP_TYPE_CLASS, 0, 0, 0 };
 
 extern const Il2CppType SliderEvent_t2111116400_0_0_0 = { (void*)1636, 0, IL2CPP_TYPE_CLASS, 0, 0, 0 };
 extern const Il2CppType SliderEvent_t2111116400_0_0_1 = { (void*)1636, 1, IL2CPP_TYPE_CLASS, 0, 0, 0 };
@@ -14235,7 +14236,7 @@ extern const Il2CppType TypeTagU5BU5D_t582616213_0_0_0 = { (void*)&TypeTag_t1412
 
 extern const Il2CppType ITrackingHandler_t2759960940_0_0_0;
 extern const Il2CppType ITrackingHandlerU5BU5D_t194660197_0_0_0 = { (void*)&ITrackingHandler_t2759960940_0_0_0, 0, IL2CPP_TYPE_SZARRAY, 0, 0, 0 };
-extern const Il2CppType* const  g_Il2CppTypeTable[7483] = 
+extern const Il2CppType* const  g_Il2CppTypeTable[7484] = 
 {
 	&IEnumerator_1_t164973122_0_0_0,
 	&Il2CppObject_0_0_0,
@@ -21660,6 +21661,7 @@ extern const Il2CppType* const  g_Il2CppTypeTable[7483] =
 	&TestSceneManager_t2345075657_0_0_0,
 	&TestSceneManager_t2345075657_1_0_0,
 	&Text_t356221433_0_0_6,
+	&Slider_t297367283_0_0_6,
 	&IEnumerator_1_t1705424029_0_0_0,
 	&IEnumerator_1_t4085313661_0_0_0,
 	&IList_1_t260801773_0_0_0,

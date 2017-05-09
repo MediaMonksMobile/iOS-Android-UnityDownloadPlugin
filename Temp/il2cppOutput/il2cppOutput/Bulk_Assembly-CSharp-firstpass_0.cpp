@@ -847,7 +847,7 @@ extern "C"  Delegate_t3022476291 * Delegate_Combine_m3791207084 (Il2CppObject * 
 // System.Delegate System.Delegate::Remove(System.Delegate,System.Delegate)
 extern "C"  Delegate_t3022476291 * Delegate_Remove_m2626518725 (Il2CppObject * __this /* static, unused */, Delegate_t3022476291 * p0, Delegate_t3022476291 * p1, const MethodInfo* method) IL2CPP_METHOD_ATTR;
 // System.Void MobileDownloadManager::configure(System.Boolean,System.Int32,System.Boolean)
-extern "C"  void MobileDownloadManager_configure_m212629127 (Il2CppObject * __this /* static, unused */, bool ___wifi0, int32_t ___maxConnections1, bool ___isSingleNotifications2, const MethodInfo* method) IL2CPP_METHOD_ATTR;
+extern "C"  void MobileDownloadManager_configure_m212629127 (Il2CppObject * __this /* static, unused */, bool ___wifi0, int32_t ___maxConnections1, bool ___notifyUserOnce2, const MethodInfo* method) IL2CPP_METHOD_ATTR;
 // System.Void MobileDownloadManager::downloadFilesWithMessage(System.String[],System.Int32,System.String)
 extern "C"  void MobileDownloadManager_downloadFilesWithMessage_m1523326149 (Il2CppObject * __this /* static, unused */, StringU5BU5D_t1642385972* ___urls0, int32_t ___count1, String_t* ___notificationMessage2, const MethodInfo* method) IL2CPP_METHOD_ATTR;
 // System.Void MobileDownloadManager::checkFileExist(System.String)
@@ -7962,12 +7962,12 @@ IL_0007:
 }
 extern "C" void DEFAULT_CALL configure(int32_t, int32_t, int32_t);
 // System.Void MobileDownloadManager::configure(System.Boolean,System.Int32,System.Boolean)
-extern "C"  void MobileDownloadManager_configure_m212629127 (Il2CppObject * __this /* static, unused */, bool ___wifi0, int32_t ___maxConnections1, bool ___isSingleNotifications2, const MethodInfo* method)
+extern "C"  void MobileDownloadManager_configure_m212629127 (Il2CppObject * __this /* static, unused */, bool ___wifi0, int32_t ___maxConnections1, bool ___notifyUserOnce2, const MethodInfo* method)
 {
 	typedef void (DEFAULT_CALL *PInvokeFunc) (int32_t, int32_t, int32_t);
 
 	// Native function invocation
-	reinterpret_cast<PInvokeFunc>(configure)(static_cast<int32_t>(___wifi0), ___maxConnections1, static_cast<int32_t>(___isSingleNotifications2));
+	reinterpret_cast<PInvokeFunc>(configure)(static_cast<int32_t>(___wifi0), ___maxConnections1, static_cast<int32_t>(___notifyUserOnce2));
 
 }
 extern "C" void DEFAULT_CALL downloadFilesWithMessage(char**, int32_t, char*);

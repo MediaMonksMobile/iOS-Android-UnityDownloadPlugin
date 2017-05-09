@@ -5,7 +5,9 @@ public class ProgressModel {
 
 	public enum ProgressType{
 		DOWNLOADING = 0,
-		SUSPENDED = 1
+		SUSPENDED = 1,
+		CANCELED = 2,
+		COMPLETED = 3
 	};
 
 	public FileModel mFile;

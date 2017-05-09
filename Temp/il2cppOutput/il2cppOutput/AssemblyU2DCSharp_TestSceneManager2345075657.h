@@ -14,6 +14,8 @@
 
 // UnityEngine.UI.Text
 struct Text_t356221433;
+// UnityEngine.UI.Slider
+struct Slider_t297367283;
 // System.String[]
 struct StringU5BU5D_t1642385972;
 // System.String
@@ -50,10 +52,12 @@ public:
 	Text_t356221433 * ___pauzeText_9;
 	// UnityEngine.UI.Text TestSceneManager::resumeText
 	Text_t356221433 * ___resumeText_10;
+	// UnityEngine.UI.Slider TestSceneManager::progressSlider
+	Slider_t297367283 * ___progressSlider_11;
 	// System.Boolean TestSceneManager::onlyWifi
-	bool ___onlyWifi_11;
+	bool ___onlyWifi_12;
 	// System.String[] TestSceneManager::urls
-	StringU5BU5D_t1642385972* ___urls_12;
+	StringU5BU5D_t1642385972* ___urls_13;
 
 public:
 	inline static int32_t get_offset_of_actionText_2() { return static_cast<int32_t>(offsetof(TestSceneManager_t2345075657, ___actionText_2)); }
@@ -137,21 +141,30 @@ public:
 		Il2CppCodeGenWriteBarrier(&___resumeText_10, value);
 	}
 
-	inline static int32_t get_offset_of_onlyWifi_11() { return static_cast<int32_t>(offsetof(TestSceneManager_t2345075657, ___onlyWifi_11)); }
-	inline bool get_onlyWifi_11() const { return ___onlyWifi_11; }
-	inline bool* get_address_of_onlyWifi_11() { return &___onlyWifi_11; }
-	inline void set_onlyWifi_11(bool value)
+	inline static int32_t get_offset_of_progressSlider_11() { return static_cast<int32_t>(offsetof(TestSceneManager_t2345075657, ___progressSlider_11)); }
+	inline Slider_t297367283 * get_progressSlider_11() const { return ___progressSlider_11; }
+	inline Slider_t297367283 ** get_address_of_progressSlider_11() { return &___progressSlider_11; }
+	inline void set_progressSlider_11(Slider_t297367283 * value)
 	{
-		___onlyWifi_11 = value;
+		___progressSlider_11 = value;
+		Il2CppCodeGenWriteBarrier(&___progressSlider_11, value);
 	}
 
-	inline static int32_t get_offset_of_urls_12() { return static_cast<int32_t>(offsetof(TestSceneManager_t2345075657, ___urls_12)); }
-	inline StringU5BU5D_t1642385972* get_urls_12() const { return ___urls_12; }
-	inline StringU5BU5D_t1642385972** get_address_of_urls_12() { return &___urls_12; }
-	inline void set_urls_12(StringU5BU5D_t1642385972* value)
+	inline static int32_t get_offset_of_onlyWifi_12() { return static_cast<int32_t>(offsetof(TestSceneManager_t2345075657, ___onlyWifi_12)); }
+	inline bool get_onlyWifi_12() const { return ___onlyWifi_12; }
+	inline bool* get_address_of_onlyWifi_12() { return &___onlyWifi_12; }
+	inline void set_onlyWifi_12(bool value)
 	{
-		___urls_12 = value;
-		Il2CppCodeGenWriteBarrier(&___urls_12, value);
+		___onlyWifi_12 = value;
+	}
+
+	inline static int32_t get_offset_of_urls_13() { return static_cast<int32_t>(offsetof(TestSceneManager_t2345075657, ___urls_13)); }
+	inline StringU5BU5D_t1642385972* get_urls_13() const { return ___urls_13; }
+	inline StringU5BU5D_t1642385972** get_address_of_urls_13() { return &___urls_13; }
+	inline void set_urls_13(StringU5BU5D_t1642385972* value)
+	{
+		___urls_13 = value;
+		Il2CppCodeGenWriteBarrier(&___urls_13, value);
 	}
 };
 
@@ -159,16 +172,16 @@ struct TestSceneManager_t2345075657_StaticFields
 {
 public:
 	// System.String TestSceneManager::notificationMessage
-	String_t* ___notificationMessage_13;
+	String_t* ___notificationMessage_14;
 
 public:
-	inline static int32_t get_offset_of_notificationMessage_13() { return static_cast<int32_t>(offsetof(TestSceneManager_t2345075657_StaticFields, ___notificationMessage_13)); }
-	inline String_t* get_notificationMessage_13() const { return ___notificationMessage_13; }
-	inline String_t** get_address_of_notificationMessage_13() { return &___notificationMessage_13; }
-	inline void set_notificationMessage_13(String_t* value)
+	inline static int32_t get_offset_of_notificationMessage_14() { return static_cast<int32_t>(offsetof(TestSceneManager_t2345075657_StaticFields, ___notificationMessage_14)); }
+	inline String_t* get_notificationMessage_14() const { return ___notificationMessage_14; }
+	inline String_t** get_address_of_notificationMessage_14() { return &___notificationMessage_14; }
+	inline void set_notificationMessage_14(String_t* value)
 	{
-		___notificationMessage_13 = value;
-		Il2CppCodeGenWriteBarrier(&___notificationMessage_13, value);
+		___notificationMessage_14 = value;
+		Il2CppCodeGenWriteBarrier(&___notificationMessage_14, value);
 	}
 };
 

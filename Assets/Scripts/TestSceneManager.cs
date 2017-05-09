@@ -25,6 +25,8 @@ public class TestSceneManager : MonoBehaviour {
 	public Text pauzeText;
 	public Text resumeText;
 
+	public Slider progressSlider;
+
 	/* *
 	 * Boolean variable for setting the button state
 	 * */
@@ -35,11 +37,12 @@ public class TestSceneManager : MonoBehaviour {
 	 * Remember that the ProgressMessage methods are not being called
 	 * if the url headers are not available.
 	 * Default "www.colocenter.nl" do not support these headers.
+	 * http://mirror.nl.leaseweb.net/speedtest/1000mb.bin does
 	 * */
 	private string[] urls = { 
-		"http://www.colocenter.nl/speedtest/100mb.bin",
-		"http://www.colocenter.nl/speedtest/250mb.bin",
-		"http://www.colocenter.nl/speedtest/500mb.bin" 
+		"http://www.colocenter.nl/speedtest/25mb.bin",
+		"http://www.colocenter.nl/speedtest/50mb.bin",
+		"http://www.colocenter.nl/speedtest/100mb.bin" 
 	};
 
 	/* *
@@ -313,6 +316,8 @@ public class TestSceneManager : MonoBehaviour {
 		actionText.text = "Success: " + success.mSuccessMessage +
 		" State: " + success.mSuccessType+" "+
 			((success.mFiles!=null)?success.mFiles.Length+" files "+ success.mFiles[0].mFilePath:" no files");
+
+		progressSlider.value = (float)0;
 	}
 
 	/* *
@@ -324,6 +329,8 @@ public class TestSceneManager : MonoBehaviour {
 		actionText.text = "Error: "+error.mErrorMessage +
 			" State: " + error.mErrorType+" "+
 			((error.mFiles!=null)?error.mFiles.Length+" files "+ error.mFiles[0].mFilePath:" no files");
+
+		progressSlider.value = (float)0;
 	}
 
 	/* *
@@ -334,8 +341,10 @@ public class TestSceneManager : MonoBehaviour {
 	{
 		statusText.text = "Progress: "+progress.mProgress+"%"+
 			" File in group "+progress.mGroupPosition+"/"+progress.mGroupSize+
-			" File: "+((progress.mFile!=null)?progress.mFile.mFilePath:" no file info")+
+			" File: "+((progress.mFile != null)?progress.mFile.mFilePath:" no file info")+
 			" State: "+progress.mProgressType;
+
+		progressSlider.value = (float)progress.mProgress;
 	}
 
 	/* *

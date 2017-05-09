@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+extern NSString * const cellularKey;
+
 @interface mobiledownloadmanager : NSObject
 
 + (void)configureWithWifiOnly:(bool)status maxConnections:(int)maxConnections notifyUserOnce:(bool)notifyUserOnce;

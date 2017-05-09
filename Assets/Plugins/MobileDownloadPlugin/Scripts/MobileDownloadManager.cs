@@ -22,7 +22,7 @@ public class MobileDownloadManager : Singleton<MobileDownloadManager>
 	#elif UNITY_IOS
 
 		[DllImport("__Internal")]
-		public static extern void configure(bool wifi, int maxConnections, bool isSingleNotifications);
+		public static extern void configure(bool wifi, int maxConnections, bool notifyUserOnce);
 		
 		[DllImport("__Internal")]
 		public static extern void downloadFilesWithMessage(string[] urls, int count, string notificationMessage);
@@ -70,9 +70,7 @@ public class MobileDownloadManager : Singleton<MobileDownloadManager>
 	/**
 	 * @Deprecated not needed anymore. Initialize MobileDownloadManager, should be called from Awake().
 	 **/
-	public void Init ()
-	{
-	}
+	public void Init (){}
 		
 	/* Configure Method calls a instancetype for configuring HTTPMaxConnectionsPerHost and OnlyWifi enabled
 	* @param(bool) for applying the OnlyWifi enabling
