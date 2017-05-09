@@ -11,11 +11,9 @@
 
 @interface mobiledownloadmanager : NSObject
 
-+ (void)configureWithWifiOnly:(bool)status maxConnections:(int)maxConnections;
++ (void)configureWithWifiOnly:(bool)status maxConnections:(int)maxConnections notifyUserOnce:(bool)notifyUserOnce;
 
-+ (void)downloadFileWithURL:(NSString *)url;
-
-+ (void)downloadFilesWithURLS:(NSArray <NSString *> *)urls;
++ (void)downloadFilesWithURLS:(NSArray <NSString *> *)urls andMessage:(NSString *)message;
 
 + (void)deleteFileWithName:(NSString *)name;
 
@@ -37,7 +35,7 @@
 
 + (void)resumeAllDownloads;
 
-- (void)startDownloadWithURL:(NSString *)url;
+- (void)startDownloadWithURL:(NSString *)url andMessage:(NSString *)message;
 
 - (void)setCellularAllowed:(BOOL)allowed;
 

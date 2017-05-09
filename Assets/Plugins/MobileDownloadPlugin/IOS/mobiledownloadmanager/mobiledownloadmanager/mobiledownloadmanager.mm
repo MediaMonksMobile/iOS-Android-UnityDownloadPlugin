@@ -9,36 +9,39 @@
 #import "mobiledownloadmanager.h"
 #import "FileDownloadInfo.h"
 #import "WMLSwizzler.h"
+
 #include <sys/mount.h>
+#include "UnityInterface.h"
 
 @interface mobiledownloadmanager () <NSURLSessionDelegate, NSURLSessionDownloadDelegate>
 
 @property (nonatomic, strong) NSURLSession *session;
 @property (nonatomic, strong) NSMutableArray<FileDownloadInfo *> *fileDownloads;
 @property (nonatomic, strong) NSURL *docDirectoryURL;
+@property (nonatomic, getter=isSingleNotification) BOOL singleNotification;
 
 @end
 
 static mobiledownloadmanager *globalSelf;
 
 typedef id (*IMPPlus)(id, SEL, UIApplication*, NSString*, void (^completionHandler)());
-extern void UnitySendMessage(const char *, const char *, const char *);
+//extern void UnitySendMessage(const char *, const char *, const char *);
 
 @implementation mobiledownloadmanager
 
 - (instancetype)init {
-    return [self initWithWifiOnly:true maxConnections:1];
+    return [self initWithWifiOnly:true maxConnections:1 notifyUserOnce:true];
 }
 
-- (instancetype)initWithWifiOnly:(bool)status maxConnections:(int)amount {
+- (instancetype)initWithWifiOnly:(bool)status maxConnections:(int)amount notifyUserOnce:(bool)notifyUserOnce {
 	self = [super init];
 	if (self) {
         
 		globalSelf = self;
+        
+        _singleNotification = notifyUserOnce;
 
         NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:[NSString stringWithFormat:@"com.mediamonks.mobiledownloadmanager"]];
-        
-        //QUESTION:
         sessionConfiguration.HTTPMaximumConnectionsPerHost = amount;
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -79,35 +82,25 @@ extern void UnitySendMessage(const char *, const char *, const char *);
 
 #pragma mark - Methods callable from Unity
 
-+ (void)configureWithWifiOnly:(bool)status maxConnections:(int)maxConnections
++ (void)configureWithWifiOnly:(bool)status maxConnections:(int)maxConnections notifyUserOnce:(bool)notifyUserOnce
 {
     if(!globalSelf)
     {
-        globalSelf = [[mobiledownloadmanager alloc] initWithWifiOnly:status maxConnections:maxConnections];
+        globalSelf = [[mobiledownloadmanager alloc] initWithWifiOnly:status maxConnections:maxConnections notifyUserOnce:notifyUserOnce];
     }
 }
 
-+ (void)downloadFileWithURL:(NSString *)url
++ (void)downloadFilesWithURLS:(NSArray <NSString *> *)urls andMessage:(NSString *)message
 {
-	if(!globalSelf)
-	{
-		globalSelf = [[mobiledownloadmanager alloc] init];
-	}
-
-	[globalSelf startDownloadWithURL:url];
-}
-
-+ (void)downloadFilesWithURLS:(NSArray <NSString *> *)urls
-{
-	if(!globalSelf)
-	{
-		globalSelf = [[mobiledownloadmanager alloc] init];
-	}
-
-	for (NSUInteger i = 0; i < urls.count; ++i) {
-		NSLog(@"mobiledownloadmanager - Download: %@", urls[i]);
-		[globalSelf startDownloadWithURL:urls[i]];
-	}
+    if(!globalSelf)
+    {
+        globalSelf = [[mobiledownloadmanager alloc] init];
+    }
+    
+    for (NSUInteger i = 0; i < urls.count; ++i) {
+        NSLog(@"mobiledownloadmanager - Download: %@", urls[i]);
+        [globalSelf startDownloadWithURL:urls[i] andMessage:message];
+    }
 }
 
 + (void)deleteFileWithName:(NSString *)name
@@ -240,66 +233,64 @@ extern void UnitySendMessage(const char *, const char *, const char *);
 
 #pragma mark - Internal methods
 
-- (void)startDownloadWithURL:(NSString *)url
+- (void)startDownloadWithURL:(NSString *)url andMessage:(NSString *)message
 {
-    NSLog(@"\n\n\nDit is een URL: %@", url);
+    NSFileManager *fileManager = [NSFileManager defaultManager];
     
-	NSFileManager *fileManager = [NSFileManager defaultManager];
-
-	NSURL *URL = [NSURL URLWithString:url];
+    NSURL *URL = [NSURL URLWithString:url];
+    NSString *destinationFilename = URL.lastPathComponent;
+    NSURL *destinationURL = [self.docDirectoryURL URLByAppendingPathComponent:destinationFilename];
     
-	NSString *destinationFilename = URL.lastPathComponent;
-	NSURL *destinationURL = [self.docDirectoryURL URLByAppendingPathComponent:destinationFilename];
-
-	if ([fileManager fileExistsAtPath:[destinationURL path]]) {
-		//File is already downloaded.
-		NSLog(@"mobiledownloadmanager - File already exists.");
-
-		NSDictionary *JSONDic = @{
-					@"mFilePath": destinationURL.absoluteString,
-					@"mFileUrl": url
-		};
-
-		NSDictionary *JSONData = @{
-				@"mSuccessType": @0,
-				@"mSuccessMessage": @"File already exists.",
-				@"mFiles":@[JSONDic]
-		};
-
-		[self sendMessageToUnity:"SuccessMessage" JSONDataDictionary: JSONData];
+    if ([fileManager fileExistsAtPath:[destinationURL path]]) {
+        //File is already downloaded.
+        NSLog(@"mobiledownloadmanager - File already exists.");
         
-		return;
-	}
-
-	for (NSUInteger i = 0; i < self.fileDownloads.count; ++i) {
-		FileDownloadInfo *fdi = self.fileDownloads[i];
-
-		if([fdi.downloadURL isEqualToString:url])
-		{
-			if(fdi.isDownloading)
-			{
-				NSLog(@"mobiledownloadmanager - File already downloading");
-				return;
-			}
-
-			if(fdi.downloadComplete)
-			{
-				NSLog(@"mobiledownloadmanager - File already downloaded");
-				return;
-			}
-		}
-	}
-
-	NSLog(@"mobiledownloadmanager - Start downloading: %@", url);
-
-	FileDownloadInfo *fdi = [[FileDownloadInfo alloc] initWithDownloadURL:url];
-
-	fdi.downloadTask = [self.session downloadTaskWithURL:[NSURL URLWithString:fdi.downloadURL]];
-	fdi.taskIdentifier = fdi.downloadTask.taskIdentifier;
-	fdi.isDownloading = YES;
-	[fdi.downloadTask resume];
-
-	[self.fileDownloads addObject:fdi];
+        NSDictionary *JSONDic = @{
+                                  @"mFilePath": destinationURL.absoluteString,
+                                  @"mFileUrl": url
+                                  };
+        
+        NSDictionary *JSONData = @{
+                                   @"mSuccessType": @0,
+                                   @"mSuccessMessage": @"File already exists.",
+                                   @"mFiles":@[JSONDic]
+                                   };
+        
+        [self sendMessageToUnity:"SuccessMessage" JSONDataDictionary: JSONData];
+        
+        return;
+    }
+    
+    for (NSUInteger i = 0; i < self.fileDownloads.count; ++i) {
+        FileDownloadInfo *fdi = self.fileDownloads[i];
+        
+        if([fdi.downloadURL isEqualToString:url])
+        {
+            if(fdi.isDownloading)
+            {
+                NSLog(@"mobiledownloadmanager - File already downloading");
+                return;
+            }
+            
+            if(fdi.downloadComplete)
+            {
+                NSLog(@"mobiledownloadmanager - File already downloaded");
+                return;
+            }
+        }
+    }
+    
+    NSLog(@"mobiledownloadmanager - Start downloading: %@", url);
+    
+    FileDownloadInfo *fdi = [[FileDownloadInfo alloc] initWithDownloadURL:url];
+    
+    fdi.downloadTask = [self.session downloadTaskWithURL:[NSURL URLWithString:fdi.downloadURL]];
+    fdi.notificationMessage = message;
+    fdi.taskIdentifier = fdi.downloadTask.taskIdentifier;
+    fdi.isDownloading = YES;
+    [fdi.downloadTask resume];
+    
+    [self.fileDownloads addObject:fdi];
 }
 
 - (void)deleteFileWithNames:(NSArray <NSString *>*)names
@@ -317,7 +308,7 @@ extern void UnitySendMessage(const char *, const char *, const char *);
 		for (NSUInteger i = 0; i < self.fileDownloads.count; ++i) {
 			FileDownloadInfo *fdi = self.fileDownloads[i];
 			NSURL *fdiURL = [NSURL URLWithString:fdi.downloadURL];
-			if([fdiURL.lastPathComponent isEqualToString:deleteFilename])
+			if([fdiURL.lastPathComponent isEqual:deleteFilename])
 			{
 				NSLog(@"mobiledownloadmanager - Cancel download");
 				[fdi.downloadTask cancel];
@@ -385,10 +376,6 @@ extern void UnitySendMessage(const char *, const char *, const char *);
     
     BOOL nameFound = NO;
     
-    //TODO:
-    //      1. Pause Download By Name string
-    //      2. Update Amount Unity Label
-    
     NSLog(@"mobiledownloadmanager - Pause single downloads");
     for (NSUInteger i = 0; i < self.fileDownloads.count; i++) {
         FileDownloadInfo *fdi = self.fileDownloads[i];
@@ -432,17 +419,15 @@ extern void UnitySendMessage(const char *, const char *, const char *);
     
     BOOL nameFound = NO;
     
-    //TODO:
-    //      1. Resume Download By Name string
-    //      2. Update Amount Unity Label
-    
     for (NSUInteger i = 0; i < self.fileDownloads.count; ++i) {
         FileDownloadInfo *fdi = self.fileDownloads[i];
         if ([fdi.downloadURL isEqual:name]){
             if(!fdi.isDownloading && !fdi.downloadComplete)
             {
-                
-//                fdi.downloadTask = [self.session downloadTaskWithResumeData:fdi.taskResumeData];
+                if (fdi.taskResumeData == nil) {
+                    NSLog(@"URL: %@ has not data yet", fdi.downloadURL);
+                    break;
+                }
                 
                 // Bug fux for NULL reference on ResumeData
                 NSData *cData = [self correctResumData:fdi.taskResumeData];
@@ -463,14 +448,8 @@ extern void UnitySendMessage(const char *, const char *, const char *);
                 }
                 
                 [fdi.downloadTask resume];
-                
                 fdi.taskIdentifier = fdi.downloadTask.taskIdentifier;
-                
                 fdi.isDownloading = !fdi.isDownloading;
-                
-                NSLog(@"%@", [[NSString alloc] initWithData:fdi.taskResumeData encoding:NSUTF8StringEncoding]);
-                
-                NSLog(@"%@", fdi.taskResumeData);
                 
                 nameFound = YES;
             }
@@ -491,7 +470,10 @@ extern void UnitySendMessage(const char *, const char *, const char *);
 		FileDownloadInfo *fdi = self.fileDownloads[i];
 		if(!fdi.isDownloading && !fdi.downloadComplete)
 		{
-//			fdi.downloadTask = [self.session downloadTaskWithResumeData:fdi.taskResumeData];
+            if (fdi.taskResumeData == nil) {
+                NSLog(@"ResumeData of %@ is nil", fdi.downloadURL);
+                break;
+            }
             
             // Bug fux for NULL reference on ResumeData
             NSData *cData = [self correctResumData:fdi.taskResumeData];
@@ -512,9 +494,7 @@ extern void UnitySendMessage(const char *, const char *, const char *);
             }
             
 			[fdi.downloadTask resume];
-
-			fdi.taskIdentifier = fdi.downloadTask.taskIdentifier;
-            
+            fdi.taskIdentifier = fdi.downloadTask.taskIdentifier;
             fdi.isDownloading = !fdi.isDownloading;
 		}
 	}
@@ -522,13 +502,6 @@ extern void UnitySendMessage(const char *, const char *, const char *);
 
 - (void)cancelSingleDownload:(NSString *)name
 {
-    NSLog(@"cancelSingleDownload: %@", name);
-    
-    BOOL nameFound = NO;
-    
-    //TODO:
-    //      1. Cancel Download By Name string
-    //      2. Update Amount Unity Label
     
     NSLog(@"mobiledownloadmanager - Cancel single downloads");
     for (NSUInteger i = 0; i < self.fileDownloads.count; ++i) {
@@ -537,15 +510,7 @@ extern void UnitySendMessage(const char *, const char *, const char *);
             [fdi.downloadTask cancel];
             
             [self.fileDownloads removeObjectAtIndex:i];
-            
-            nameFound = YES;
         }
-    }
-    
-    if (nameFound) {
-        NSLog(@"Canceled url: %@", name);
-    } else {
-        NSLog(@"Could not cancel url: %@", name);
     }
 }
 
@@ -556,7 +521,6 @@ extern void UnitySendMessage(const char *, const char *, const char *);
 		FileDownloadInfo *fdi = self.fileDownloads[i];
 		[fdi.downloadTask cancel];
 	}
-
 	[self.fileDownloads removeAllObjects];
 }
 
@@ -594,6 +558,9 @@ extern void UnitySendMessage(const char *, const char *, const char *);
 			success = NO;
 		}
 	}
+    
+    if (dicArray.count != 0)
+        [self getDownloadedFilesLength:dicArray];
 
 	NSString *message;
 
@@ -632,67 +599,68 @@ extern void UnitySendMessage(const char *, const char *, const char *);
 	NSString *destinationFilename = downloadTask.originalRequest.URL.lastPathComponent;
 	NSURL *destinationURL = [self.docDirectoryURL URLByAppendingPathComponent:destinationFilename];
 
-	BOOL success = [fileManager moveItemAtURL:location
-	                                    toURL:destinationURL
-	                                    error:&error];
-
+	BOOL success = [fileManager moveItemAtURL:location toURL:destinationURL error:&error];
+    
 	NSUInteger index = [self getFileDownloadInfoIndexWithTaskIdentifier:downloadTask.taskIdentifier];
 	FileDownloadInfo *fdi = self.fileDownloads[index];
-
-	if (success) {
-		fdi.isDownloading = NO;
-		fdi.downloadComplete = YES;
-		fdi.taskIdentifier = (unsigned long) -1;
-		fdi.taskResumeData = nil;
-		fdi.downloadPath = destinationURL.absoluteString;
-
-		BOOL shouldSendNotification = YES;
-
-		for (NSUInteger i = 0; i < self.fileDownloads.count; ++i) {
-			FileDownloadInfo *fdInfo = self.fileDownloads[i];
-			if(fdInfo.isDownloading)
-			{
-				shouldSendNotification = NO;
-			}
-		}
-
-		if(shouldSendNotification)
-		{
-			UILocalNotification *notification = [[UILocalNotification alloc] init];
-			notification.alertBody = @"All downloads complete!";
-			notification.fireDate = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
-			notification.timeZone = [NSTimeZone defaultTimeZone];
-			notification.repeatInterval = 0;
-			[[UIApplication sharedApplication] presentLocalNotificationNow:notification];
-
-			NSLog(@"mobiledownloadmanager - All downloads complete, send local notification.");
-
-			NSMutableArray *dicArray = [[NSMutableArray alloc] init];
-
-			for (NSUInteger i = 0; i < self.fileDownloads.count; ++i) {
-				FileDownloadInfo *fdInfo = self.fileDownloads[i];
-
-				NSDictionary *JSONDic = @{
-							@"mFilePath": fdInfo.downloadPath,
-							@"mFileUrl": fdInfo.downloadURL
-				};
-
-				[dicArray addObject:JSONDic];
-			}
-
-			NSDictionary *JSONData = @{
-					@"mSuccessType": @0,
-					@"mSuccessMessage": @"Downloaded.",
-					@"mFiles": dicArray
-			};
-
-			[self sendMessageToUnity:"SuccessMessage" JSONDataDictionary:JSONData];
-
-			[self.fileDownloads removeAllObjects];
-		}
-	}
-	else
-    {
+    
+    if (success) {
+        
+        fdi.isDownloading = NO;
+        fdi.downloadComplete = YES;
+        fdi.taskIdentifier = (unsigned long) -1;
+        fdi.taskResumeData = nil;
+        fdi.downloadPath = destinationURL.absoluteString;
+        
+        if(!_singleNotification) {
+            
+            BOOL shouldSendNotification = YES;
+            
+            for (NSUInteger i = 0; i < self.fileDownloads.count; ++i) {
+            
+                FileDownloadInfo *fdInfo = self.fileDownloads[i];
+                
+                if(fdInfo.isDownloading) {
+                    shouldSendNotification = NO;
+                }
+            }
+            
+            if(shouldSendNotification) {
+            
+                [self sendLocalNotification:fdi.notificationMessage];
+            }
+            
+        } else {
+            
+            [self sendLocalNotification:fdi.notificationMessage];
+        }
+        
+        NSLog(@"mobiledownloadmanager - All downloads complete, send local notification.");
+        
+        NSMutableArray *dicArray = [[NSMutableArray alloc] init];
+        
+        for (NSUInteger i = 0; i < self.fileDownloads.count; ++i) {
+            FileDownloadInfo *fdInfo = self.fileDownloads[i];
+            
+            NSDictionary *JSONDic = @{
+                                      @"mFilePath": fdInfo.downloadPath,
+                                      @"mFileUrl": fdInfo.downloadURL
+                                      };
+            
+            [dicArray addObject:JSONDic];
+        }
+        
+        NSDictionary *JSONData = @{
+                                   @"mSuccessType": @0,
+                                   @"mSuccessMessage": @"Downloaded.",
+                                   @"mFiles": dicArray
+                                   };
+        
+        [self sendMessageToUnity:"SuccessMessage" JSONDataDictionary:JSONData];
+        
+        [self.fileDownloads removeAllObjects];
+        
+    } else {
         
 		NSLog(@"mobiledownloadmanager - Unable to move temp file. Error: %@", [error localizedDescription]);
 
@@ -708,7 +676,6 @@ extern void UnitySendMessage(const char *, const char *, const char *);
 		};
         
         [self sendMessageToUnity:"ErrorMessage" JSONDataDictionary:JSONDic];
-
 	}
 }
 
@@ -725,9 +692,13 @@ extern void UnitySendMessage(const char *, const char *, const char *);
 		{
 			errorType = 3;
 		}
+        else if (error.code == NSURLErrorNetworkConnectionLost)
+        {
+            errorType = 5;
+        }
         else if (error.code == NSURLErrorTimedOut)
         {
-            errorType = 4;
+            errorType = 7;
         }
 
 		NSLog(@"mobiledownloadmanager - Error Downloading: %@", [error localizedDescription]);
@@ -770,11 +741,15 @@ extern void UnitySendMessage(const char *, const char *, const char *);
 - (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didWriteData:(int64_t)bytesWritten totalBytesWritten:(int64_t)totalBytesWritten totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
 {
 	if (totalBytesExpectedToWrite == NSURLSessionTransferSizeUnknown) {
-		NSLog(@"mobiledownloadmanager - Unknown transfer size");
-	}
-	else{
+        
+        NSLog(@"mobiledownloadmanager - Unknown transfer size");
+        
+	} else {
+        
 		NSUInteger index = [self getFileDownloadInfoIndexWithTaskIdentifier:downloadTask.taskIdentifier];
+        
 		if (index <= self.fileDownloads.count) {
+            
 			FileDownloadInfo *fdi = self.fileDownloads[index];
 
 			if(totalBytesExpectedToWrite > [self diskSpace])
@@ -867,6 +842,8 @@ extern void UnitySendMessage(const char *, const char *, const char *);
 //
 - (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didResumeAtOffset:(int64_t)fileOffset expectedTotalBytes:(int64_t)expectedTotalBytes {
     
+    NSLog(@"%lld", fileOffset);
+    
     NSError *err = [downloadTask.error.userInfo valueForKey:NSURLSessionDownloadTaskResumeData];
     
     NSLog(@"Error found With: %@", err.localizedDescription);
@@ -899,12 +876,7 @@ extern void UnitySendMessage(const char *, const char *, const char *);
 -(void)getDownloadedFilesLength:(NSArray *)array
 {
     
-    NSString *sizeMessage = [NSString stringWithFormat:@"Downloaded Hoi: %lu", (unsigned long)array.count];
-    
-    if (sizeMessage == nil) {
-        
-        sizeMessage = [NSString stringWithFormat:@"Downloaded Hoi: 0"];
-    }
+    NSString *sizeMessage = [NSString stringWithFormat:@"Downloads: %lu", (unsigned long)array.count];
     
     NSInteger sizeState = 0;
     
@@ -912,32 +884,42 @@ extern void UnitySendMessage(const char *, const char *, const char *);
         sizeState = 1;
     }
     
-    
     //File is already downloaded.
     NSLog(@"mobiledownloadmanager - DownloadedSize = : %d", (int)sizeState);
     
     NSDictionary *JSONDic = @{
-                              @"mFilePath": @"nil",
-                              @"mFileUrl": @"nil"
-                              };
+        @"mFilePath": @"nil",
+        @"mFileUrl": @"nil"
+    };
     
     NSDictionary *JSONData = @{
-                               @"mSizeType": @(sizeState),
-                               @"mSizeMessage": sizeMessage,
-                               @"mFiles":@[JSONDic]
-                               };
+        @"mSizeType": @(sizeState),
+        @"mSizeMessage": sizeMessage,
+        @"mFiles":@[JSONDic]
+    };
     
     [self sendMessageToUnity:"SizeMessage" JSONDataDictionary: JSONData];
 }
 
+- (void)sendLocalNotification:(NSString *)message {
+    
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+    notification.alertBody = message;
+    notification.fireDate = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
+    notification.timeZone = [NSTimeZone defaultTimeZone];
+    notification.repeatInterval = 0;
+    [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
+}
+
 - (void)sendMessageToUnity:(const char *)methodName JSONDataDictionary:(NSDictionary *)jsonDataDictionary {
+    
     const char *gameObj = "MobileDownloadManager";
     
     NSError *error;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:jsonDataDictionary
-                                                       options:NSJSONWritingPrettyPrinted
-                                                         error:&error];
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:jsonDataDictionary options:NSJSONWritingPrettyPrinted error:&error];
+    
     NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
     UnitySendMessage (gameObj, methodName, [jsonString UTF8String]);
 }
 
@@ -984,6 +966,7 @@ extern void UnitySendMessage(const char *, const char *, const char *);
         }
         i += 1;
     }
+    
     if ([[archive[@"$objects"] objectAtIndex:1] objectForKey:@"__nsurlrequest_proto_props"]) {
         NSMutableArray *arr = archive[@"$objects"];
         NSMutableDictionary *dic = [arr objectAtIndex:1];
@@ -1056,26 +1039,21 @@ static NSString * kResumeOriginalRequest = @"NSURLSessionResumeOriginalRequest";
 
 extern "C"
 {
-    void configure(bool wifiOnly, int maxConnections)
+    void configure(bool wifiOnly, int maxConnections, bool notifyUserOnce)
     {
-        [mobiledownloadmanager configureWithWifiOnly:wifiOnly maxConnections:maxConnections];
+        [mobiledownloadmanager configureWithWifiOnly:wifiOnly maxConnections:maxConnections notifyUserOnce:notifyUserOnce];
     }
     
-	void downloadFile(const char * url)
-	{
-		[mobiledownloadmanager downloadFileWithURL:[NSString stringWithUTF8String:url]];
-	}
-
-	void downloadFiles(const char* urls[], int urlcount)
-	{
-		NSMutableArray *array = [[NSMutableArray alloc] init];
-
-		for (NSUInteger i = 0; i < urlcount; ++i) {
-			[array addObject:[NSString stringWithUTF8String:urls[i]]];
-		}
-
-		[mobiledownloadmanager downloadFilesWithURLS:array];
-	}
+    void downloadFilesWithMessage(const char* urls[], int urlcount, const char * notificationMessage)
+    {
+        NSMutableArray *array = [[NSMutableArray alloc] init];
+        
+        for (NSUInteger i = 0; i < urlcount; ++i) {
+            [array addObject:[NSString stringWithUTF8String:urls[i]]];
+        }
+        
+        [mobiledownloadmanager downloadFilesWithURLS:array andMessage:[NSString stringWithUTF8String:notificationMessage]];
+    }
 
 	void deleteFile(const char * url)
 	{

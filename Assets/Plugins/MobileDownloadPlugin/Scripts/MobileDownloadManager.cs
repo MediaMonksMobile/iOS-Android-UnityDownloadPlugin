@@ -16,20 +16,16 @@ public class MobileDownloadManager : Singleton<MobileDownloadManager>
 	public event Progress OnProgress;
 
 	public event Size OnSize;
-
 	#if UNITY_ANDROID
 	AndroidJavaObject mobileDownloadAndroid;
 	AndroidJavaObject context;
 	#elif UNITY_IOS
 
 		[DllImport("__Internal")]
-		public static extern void configure(bool wifi, int maxConnections);
-
-		[DllImport("__Internal")]
-		public static extern void downloadFile(string url);
+		public static extern void configure(bool wifi, int maxConnections, bool isSingleNotifications);
 		
 		[DllImport("__Internal")]
-		public static extern void downloadFiles(string[] urls, int count);
+		public static extern void downloadFilesWithMessage(string[] urls, int count, string notificationMessage);
 
 		[DllImport("__Internal")]
 		public static extern void deleteFile(string name);
@@ -77,13 +73,13 @@ public class MobileDownloadManager : Singleton<MobileDownloadManager>
 	public void Init ()
 	{
 	}
-
-	/**
-	 * Configure initializer for pre-set Settings
-	 * @param bool File wifi
-	 * @param url File int
-	**/
-	public void Configure(bool wifi, int maxConnections)
+		
+	/* Configure Method calls a instancetype for configuring HTTPMaxConnectionsPerHost and OnlyWifi enabled
+	* @param(bool) for applying the OnlyWifi enabling
+	* @param(integer) for applying the HTTPMaxConnectionsPerHost
+	* @param(bool) for applying the Notification per download complete
+	* */
+	public void Configure(bool wifi, int maxConnections, bool isSingleNotifications)
 	{
 		#if UNITY_ANDROID
 
@@ -91,7 +87,7 @@ public class MobileDownloadManager : Singleton<MobileDownloadManager>
 
 		Debug.Log("iOS Configure With wifi Options & max connections");
 
-		configure(wifi, maxConnections);
+		configure(wifi, maxConnections, isSingleNotifications);
 
 		#else
 		Debug.Log("XXX DownloadFile");
@@ -114,7 +110,6 @@ public class MobileDownloadManager : Singleton<MobileDownloadManager>
 		downloadFileAndroid (urls, null);
 		#elif UNITY_IOS
 		Debug.Log("iOS DownloadFile");
-		downloadFile(url);
 		#else
 		Debug.Log("XXX DownloadFile");
 		#endif
@@ -133,8 +128,8 @@ public class MobileDownloadManager : Singleton<MobileDownloadManager>
 		Debug.Log ("Android DownloadFiles with custom NotificationMessage");
 		downloadFileAndroid (urls, notificationMessage);
 		#elif UNITY_IOS
-		Debug.Log("iOS DownloadFiles");
-		downloadFiles(urls, urls.Length);
+		Debug.Log("iOS DownloadFilesWithMessage: ");
+		downloadFilesWithMessage(urls, urls.Length, notificationMessage);
 		#else
 		Debug.Log("XXX DownloadFiles");
 		#endif
@@ -153,7 +148,6 @@ public class MobileDownloadManager : Singleton<MobileDownloadManager>
 		downloadFileAndroid (urls, null);
 		#elif UNITY_IOS
 		Debug.Log("iOS DownloadFiles");
-		downloadFiles(urls, urls.Length);
 		#else
 		Debug.Log("XXX DownloadFiles");
 		#endif

@@ -13,6 +13,7 @@
 	if (self == [super init]) {
 		self.downloadURL = url;
 		self.downloadPath = @"";
+        self.notificationMessage = @"";
 		self.downloadProgress = 0;
 		self.isDownloading = NO;
 		self.downloadComplete = NO;

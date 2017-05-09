@@ -184,8 +184,8 @@ extern const int32_t g_FieldOffsetTable1719[1] =
 };
 extern const Il2CppTypeDefinitionSizes g_typeDefinitionSize1720 = { sizeof (U24ArrayTypeU3D12_t1568637718)+ sizeof (Il2CppObject), sizeof(U24ArrayTypeU3D12_t1568637718 ), 0, 0 };
 extern const Il2CppTypeDefinitionSizes g_typeDefinitionSize1721 = { sizeof (U3CModuleU3E_t3783534221), -1, 0, 0 };
-extern const Il2CppTypeDefinitionSizes g_typeDefinitionSize1722 = { sizeof (TestSceneManager_t2345075657), -1, 0, 0 };
-extern const int32_t g_FieldOffsetTable1722[11] = 
+extern const Il2CppTypeDefinitionSizes g_typeDefinitionSize1722 = { sizeof (TestSceneManager_t2345075657), -1, sizeof(TestSceneManager_t2345075657_StaticFields), 0 };
+extern const int32_t g_FieldOffsetTable1722[12] = 
 {
 	TestSceneManager_t2345075657::get_offset_of_actionText_2(),
 	TestSceneManager_t2345075657::get_offset_of_statusText_3(),
@@ -198,6 +198,7 @@ extern const int32_t g_FieldOffsetTable1722[11] =
 	TestSceneManager_t2345075657::get_offset_of_resumeText_10(),
 	TestSceneManager_t2345075657::get_offset_of_onlyWifi_11(),
 	TestSceneManager_t2345075657::get_offset_of_urls_12(),
+	TestSceneManager_t2345075657_StaticFields::get_offset_of_notificationMessage_13(),
 };
 #ifdef __clang__
 #pragma clang diagnostic pop

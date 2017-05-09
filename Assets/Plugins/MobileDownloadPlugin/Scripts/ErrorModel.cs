@@ -9,7 +9,9 @@ public class ErrorModel {
 		NOT_ENOUGH_SPACE = 2,
 		CANCELED = 3,
 		PAUSED_NEED_CELLULAR_PERMISSION = 4,
-		PAUSED_NETWORK_UNAVAILABLE = 6
+		PAUSED_NETWORK_UNAVAILABLE = 6,
+		NETWORK_LOST = 5,
+		TIMED_OUT = 7
 	};
 
 	public ErrorType mErrorType;
@@ -24,7 +26,7 @@ public class ErrorModel {
 		JSONObject j = new JSONObject(messageJson);
 		mErrorType = (ErrorType) j.GetField ("mErrorType").i;
 		mErrorMessage = j.GetField ("mErrorMessage").ToString();
-		if (j.GetField ("mFiles")!=null&&!j.GetField ("mFiles").ToString().Equals("null")&&j.GetField ("mFiles").list!=null) {
+		if (j.GetField ("mFiles") != null && !j.GetField ("mFiles").ToString().Equals("null") && j.GetField ("mFiles").list != null) {
 			mFiles = new FileModel[j.GetField ("mFiles").list.Count];
 			for (int i = 0; i < j.GetField ("mFiles").list.Count; i++) {
 				mFiles [i] = new FileModel (j.GetField ("mFiles").list [i].ToString ());

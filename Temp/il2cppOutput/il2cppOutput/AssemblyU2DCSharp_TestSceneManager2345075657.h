@@ -16,6 +16,8 @@
 struct Text_t356221433;
 // System.String[]
 struct StringU5BU5D_t1642385972;
+// System.String
+struct String_t;
 
 
 
@@ -150,6 +152,23 @@ public:
 	{
 		___urls_12 = value;
 		Il2CppCodeGenWriteBarrier(&___urls_12, value);
+	}
+};
+
+struct TestSceneManager_t2345075657_StaticFields
+{
+public:
+	// System.String TestSceneManager::notificationMessage
+	String_t* ___notificationMessage_13;
+
+public:
+	inline static int32_t get_offset_of_notificationMessage_13() { return static_cast<int32_t>(offsetof(TestSceneManager_t2345075657_StaticFields, ___notificationMessage_13)); }
+	inline String_t* get_notificationMessage_13() const { return ___notificationMessage_13; }
+	inline String_t** get_address_of_notificationMessage_13() { return &___notificationMessage_13; }
+	inline void set_notificationMessage_13(String_t* value)
+	{
+		___notificationMessage_13 = value;
+		Il2CppCodeGenWriteBarrier(&___notificationMessage_13, value);
 	}
 };
 

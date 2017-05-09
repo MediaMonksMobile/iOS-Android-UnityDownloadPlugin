@@ -814,9 +814,11 @@ extern const int32_t g_FieldOffsetTable1696[3] =
 	ErrorModel_t3145739141::get_offset_of_mFiles_2(),
 };
 extern const Il2CppTypeDefinitionSizes g_typeDefinitionSize1697 = { sizeof (ErrorType_t2339525818)+ sizeof (Il2CppObject), sizeof(int32_t), 0, 0 };
-extern const int32_t g_FieldOffsetTable1697[7] = 
+extern const int32_t g_FieldOffsetTable1697[9] = 
 {
 	ErrorType_t2339525818::get_offset_of_value___1() + static_cast<int32_t>(sizeof(Il2CppObject)),
+	0,
+	0,
 	0,
 	0,
 	0,

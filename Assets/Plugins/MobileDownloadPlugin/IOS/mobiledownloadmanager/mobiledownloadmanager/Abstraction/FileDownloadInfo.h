@@ -12,6 +12,8 @@
 
 @property (nonatomic, strong) NSString *downloadPath;
 
+@property (nonatomic) NSString *notificationMessage;
+
 @property (nonatomic, strong) NSURLSessionDownloadTask *downloadTask;
 
 @property (nonatomic, strong) NSData *taskResumeData;
@@ -23,7 +25,6 @@
 @property (nonatomic) BOOL downloadComplete;
 
 @property (nonatomic) unsigned long taskIdentifier;
-
 
 -(id)initWithDownloadURL:(NSString *)url;
 

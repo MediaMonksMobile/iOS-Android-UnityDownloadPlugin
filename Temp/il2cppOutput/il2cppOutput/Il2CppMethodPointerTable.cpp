@@ -10946,9 +10946,8 @@ extern "C" void MobileDownloadManager_add_OnProgress_m427143225 ();
 extern "C" void MobileDownloadManager_remove_OnProgress_m4079734194 ();
 extern "C" void MobileDownloadManager_add_OnSize_m3288751657 ();
 extern "C" void MobileDownloadManager_remove_OnSize_m61480642 ();
-extern "C" void MobileDownloadManager_configure_m2337203658 ();
-extern "C" void MobileDownloadManager_downloadFile_m3226981308 ();
-extern "C" void MobileDownloadManager_downloadFiles_m294190820 ();
+extern "C" void MobileDownloadManager_configure_m212629127 ();
+extern "C" void MobileDownloadManager_downloadFilesWithMessage_m1523326149 ();
 extern "C" void MobileDownloadManager_deleteFile_m3001187031 ();
 extern "C" void MobileDownloadManager_deleteFiles_m3922302343 ();
 extern "C" void MobileDownloadManager_setAllowCellular_m3859111290 ();
@@ -10963,7 +10962,7 @@ extern "C" void MobileDownloadManager_checkFileExist_m1844791875 ();
 extern "C" void MobileDownloadManager_checkFilesExist_m2171396219 ();
 extern "C" void MobileDownloadManager_currentLocale_m2132993584 ();
 extern "C" void MobileDownloadManager_Init_m3641070174 ();
-extern "C" void MobileDownloadManager_Configure_m1148775274 ();
+extern "C" void MobileDownloadManager_Configure_m10068199 ();
 extern "C" void MobileDownloadManager_DownloadFile_m2612089116 ();
 extern "C" void MobileDownloadManager_DownloadFiles_m594375001 ();
 extern "C" void MobileDownloadManager_DownloadFiles_m2228589411 ();
@@ -11031,6 +11030,7 @@ extern "C" void TestSceneManager_EventDownloaded_m1160529101 ();
 extern "C" void TestSceneManager_EventError_m2730581883 ();
 extern "C" void TestSceneManager_EventProgress_m1995119191 ();
 extern "C" void TestSceneManager_EventDownloadSize_m1676891195 ();
+extern "C" void TestSceneManager__cctor_m82001371 ();
 extern const Il2CppMethodPointer g_MethodPointers[11017] = 
 {
 	Locale_GetText_m1954433032,
@@ -21965,9 +21965,8 @@ extern const Il2CppMethodPointer g_MethodPointers[11017] =
 	MobileDownloadManager_remove_OnProgress_m4079734194,
 	MobileDownloadManager_add_OnSize_m3288751657,
 	MobileDownloadManager_remove_OnSize_m61480642,
-	MobileDownloadManager_configure_m2337203658,
-	MobileDownloadManager_downloadFile_m3226981308,
-	MobileDownloadManager_downloadFiles_m294190820,
+	MobileDownloadManager_configure_m212629127,
+	MobileDownloadManager_downloadFilesWithMessage_m1523326149,
 	MobileDownloadManager_deleteFile_m3001187031,
 	MobileDownloadManager_deleteFiles_m3922302343,
 	MobileDownloadManager_setAllowCellular_m3859111290,
@@ -21982,7 +21981,7 @@ extern const Il2CppMethodPointer g_MethodPointers[11017] =
 	MobileDownloadManager_checkFilesExist_m2171396219,
 	MobileDownloadManager_currentLocale_m2132993584,
 	MobileDownloadManager_Init_m3641070174,
-	MobileDownloadManager_Configure_m1148775274,
+	MobileDownloadManager_Configure_m10068199,
 	MobileDownloadManager_DownloadFile_m2612089116,
 	MobileDownloadManager_DownloadFiles_m594375001,
 	MobileDownloadManager_DownloadFiles_m2228589411,
@@ -22050,4 +22049,5 @@ extern const Il2CppMethodPointer g_MethodPointers[11017] =
 	TestSceneManager_EventError_m2730581883,
 	TestSceneManager_EventProgress_m1995119191,
 	TestSceneManager_EventDownloadSize_m1676891195,
+	TestSceneManager__cctor_m82001371,
 };

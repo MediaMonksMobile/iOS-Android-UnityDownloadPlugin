@@ -102,12 +102,12 @@ extern Il2CppCodeGenString* _stringLiteral3734339888;
 extern const uint32_t TestSceneManager_getAndroidDownloadPath_m119135224_MetadataUsageId;
 extern Il2CppCodeGenString* _stringLiteral3938602973;
 extern const uint32_t TestSceneManager_CheckFileStatus_m2957699810_MetadataUsageId;
+extern Il2CppClass* TestSceneManager_t2345075657_il2cpp_TypeInfo_var;
 extern Il2CppCodeGenString* _stringLiteral1780435280;
 extern Il2CppCodeGenString* _stringLiteral1186891417;
 extern Il2CppCodeGenString* _stringLiteral3403942113;
 extern const uint32_t TestSceneManager_LoadFile_m1202468022_MetadataUsageId;
 extern Il2CppCodeGenString* _stringLiteral2432374328;
-extern Il2CppCodeGenString* _stringLiteral1576637533;
 extern const uint32_t TestSceneManager_LoadFiles_m2039305059_MetadataUsageId;
 extern Il2CppCodeGenString* _stringLiteral2360472694;
 extern const uint32_t TestSceneManager_DeleteFile_m569928435_MetadataUsageId;
@@ -146,6 +146,8 @@ extern Il2CppCodeGenString* _stringLiteral372029315;
 extern Il2CppCodeGenString* _stringLiteral1293195474;
 extern Il2CppCodeGenString* _stringLiteral1717632713;
 extern const uint32_t TestSceneManager_EventProgress_m1995119191_MetadataUsageId;
+extern Il2CppCodeGenString* _stringLiteral2952165749;
+extern const uint32_t TestSceneManager__cctor_m82001371_MetadataUsageId;
 
 // System.String[]
 struct StringU5BU5D_t1642385972  : public Il2CppArray
@@ -267,14 +269,16 @@ extern "C"  Il2CppObject * Singleton_1_get_Instance_m2978481817_gshared (Il2CppO
 extern "C"  void MonoBehaviour__ctor_m2464341955 (MonoBehaviour_t1158329972 * __this, const MethodInfo* method) IL2CPP_METHOD_ATTR;
 // !0 Singleton`1<MobileDownloadManager>::get_Instance()
 #define Singleton_1_get_Instance_m4098818086(__this /* static, unused */, method) ((  MobileDownloadManager_t2112422693 * (*) (Il2CppObject * /* static, unused */, const MethodInfo*))Singleton_1_get_Instance_m2978481817_gshared)(__this /* static, unused */, method)
-// System.Void MobileDownloadManager::Configure(System.Boolean,System.Int32)
-extern "C"  void MobileDownloadManager_Configure_m1148775274 (MobileDownloadManager_t2112422693 * __this, bool p0, int32_t p1, const MethodInfo* method) IL2CPP_METHOD_ATTR;
+// System.Void MobileDownloadManager::Configure(System.Boolean,System.Int32,System.Boolean)
+extern "C"  void MobileDownloadManager_Configure_m10068199 (MobileDownloadManager_t2112422693 * __this, bool p0, int32_t p1, bool p2, const MethodInfo* method) IL2CPP_METHOD_ATTR;
 // System.String MobileDownloadManager::GetCurrentLocale()
 extern "C"  String_t* MobileDownloadManager_GetCurrentLocale_m1133906964 (MobileDownloadManager_t2112422693 * __this, const MethodInfo* method) IL2CPP_METHOD_ATTR;
 // System.String System.String::Concat(System.String,System.String)
 extern "C"  String_t* String_Concat_m2596409543 (Il2CppObject * __this /* static, unused */, String_t* p0, String_t* p1, const MethodInfo* method) IL2CPP_METHOD_ATTR;
 // System.Void UnityEngine.Debug::Log(System.Object)
 extern "C"  void Debug_Log_m920475918 (Il2CppObject * __this /* static, unused */, Il2CppObject * p0, const MethodInfo* method) IL2CPP_METHOD_ATTR;
+// System.Boolean MobileDownloadManager::IsWifiOnly()
+extern "C"  bool MobileDownloadManager_IsWifiOnly_m2699150905 (MobileDownloadManager_t2112422693 * __this, const MethodInfo* method) IL2CPP_METHOD_ATTR;
 // System.String System.String::Concat(System.Object,System.Object)
 extern "C"  String_t* String_Concat_m56707527 (Il2CppObject * __this /* static, unused */, Il2CppObject * p0, Il2CppObject * p1, const MethodInfo* method) IL2CPP_METHOD_ATTR;
 // System.Void MobileDownloadManager/Success::.ctor(System.Object,System.IntPtr)
@@ -313,12 +317,8 @@ extern "C"  bool TestSceneManager_isValidTextInput_m1783488093 (TestSceneManager
 extern "C"  int32_t Int32_Parse_m3683414232 (Il2CppObject * __this /* static, unused */, String_t* p0, const MethodInfo* method) IL2CPP_METHOD_ATTR;
 // System.Boolean TestSceneManager::isValidIndex(System.Int32)
 extern "C"  bool TestSceneManager_isValidIndex_m3760484731 (TestSceneManager_t2345075657 * __this, int32_t ___index0, const MethodInfo* method) IL2CPP_METHOD_ATTR;
-// System.Void MobileDownloadManager::DownloadFile(System.String)
-extern "C"  void MobileDownloadManager_DownloadFile_m2612089116 (MobileDownloadManager_t2112422693 * __this, String_t* p0, const MethodInfo* method) IL2CPP_METHOD_ATTR;
 // System.Void MobileDownloadManager::DownloadFiles(System.String[],System.String)
 extern "C"  void MobileDownloadManager_DownloadFiles_m594375001 (MobileDownloadManager_t2112422693 * __this, StringU5BU5D_t1642385972* p0, String_t* p1, const MethodInfo* method) IL2CPP_METHOD_ATTR;
-// System.Void MobileDownloadManager::DeleteFile(System.String)
-extern "C"  void MobileDownloadManager_DeleteFile_m3996110199 (MobileDownloadManager_t2112422693 * __this, String_t* p0, const MethodInfo* method) IL2CPP_METHOD_ATTR;
 // System.Void MobileDownloadManager::DeleteFiles(System.String[])
 extern "C"  void MobileDownloadManager_DeleteFiles_m3519775302 (MobileDownloadManager_t2112422693 * __this, StringU5BU5D_t1642385972* p0, const MethodInfo* method) IL2CPP_METHOD_ATTR;
 // System.Void MobileDownloadManager::CancelSingleDownload(System.String)
@@ -387,7 +387,7 @@ extern "C"  void TestSceneManager_Start_m3462417622 (TestSceneManager_t234507565
 		IL2CPP_RUNTIME_CLASS_INIT(Singleton_1_t3288307080_il2cpp_TypeInfo_var);
 		MobileDownloadManager_t2112422693 * L_0 = Singleton_1_get_Instance_m4098818086(NULL /*static, unused*/, /*hidden argument*/Singleton_1_get_Instance_m4098818086_MethodInfo_var);
 		NullCheck(L_0);
-		MobileDownloadManager_Configure_m1148775274(L_0, (bool)1, 1, /*hidden argument*/NULL);
+		MobileDownloadManager_Configure_m10068199(L_0, (bool)1, 1, (bool)1, /*hidden argument*/NULL);
 		MobileDownloadManager_t2112422693 * L_1 = Singleton_1_get_Instance_m4098818086(NULL /*static, unused*/, /*hidden argument*/Singleton_1_get_Instance_m4098818086_MethodInfo_var);
 		NullCheck(L_1);
 		String_t* L_2 = MobileDownloadManager_GetCurrentLocale_m1133906964(L_1, /*hidden argument*/NULL);
@@ -395,52 +395,56 @@ extern "C"  void TestSceneManager_Start_m3462417622 (TestSceneManager_t234507565
 		String_t* L_3 = String_Concat_m2596409543(NULL /*static, unused*/, _stringLiteral2688412802, L_2, /*hidden argument*/NULL);
 		IL2CPP_RUNTIME_CLASS_INIT(Debug_t1368543263_il2cpp_TypeInfo_var);
 		Debug_Log_m920475918(NULL /*static, unused*/, L_3, /*hidden argument*/NULL);
-		Text_t356221433 * L_4 = __this->get_cellularButtonText_5();
-		bool L_5 = __this->get_onlyWifi_11();
-		bool L_6 = L_5;
-		Il2CppObject * L_7 = Box(Boolean_t3825574718_il2cpp_TypeInfo_var, &L_6);
-		String_t* L_8 = String_Concat_m56707527(NULL /*static, unused*/, _stringLiteral610354465, L_7, /*hidden argument*/NULL);
+		MobileDownloadManager_t2112422693 * L_4 = Singleton_1_get_Instance_m4098818086(NULL /*static, unused*/, /*hidden argument*/Singleton_1_get_Instance_m4098818086_MethodInfo_var);
 		NullCheck(L_4);
-		VirtActionInvoker1< String_t* >::Invoke(72 /* System.Void UnityEngine.UI.Text::set_text(System.String) */, L_4, L_8);
-		MobileDownloadManager_t2112422693 * L_9 = Singleton_1_get_Instance_m4098818086(NULL /*static, unused*/, /*hidden argument*/Singleton_1_get_Instance_m4098818086_MethodInfo_var);
-		IntPtr_t L_10;
-		L_10.set_m_value_0((void*)(void*)TestSceneManager_EventDownloaded_m1160529101_MethodInfo_var);
-		Success_t1862374945 * L_11 = (Success_t1862374945 *)il2cpp_codegen_object_new(Success_t1862374945_il2cpp_TypeInfo_var);
-		Success__ctor_m1124332342(L_11, __this, L_10, /*hidden argument*/NULL);
-		NullCheck(L_9);
-		MobileDownloadManager_add_OnSuccess_m446867157(L_9, L_11, /*hidden argument*/NULL);
-		MobileDownloadManager_t2112422693 * L_12 = Singleton_1_get_Instance_m4098818086(NULL /*static, unused*/, /*hidden argument*/Singleton_1_get_Instance_m4098818086_MethodInfo_var);
-		IntPtr_t L_13;
-		L_13.set_m_value_0((void*)(void*)TestSceneManager_EventError_m2730581883_MethodInfo_var);
-		Error_t1232275708 * L_14 = (Error_t1232275708 *)il2cpp_codegen_object_new(Error_t1232275708_il2cpp_TypeInfo_var);
-		Error__ctor_m1685326973(L_14, __this, L_13, /*hidden argument*/NULL);
-		NullCheck(L_12);
-		MobileDownloadManager_add_OnError_m689020021(L_12, L_14, /*hidden argument*/NULL);
-		MobileDownloadManager_t2112422693 * L_15 = Singleton_1_get_Instance_m4098818086(NULL /*static, unused*/, /*hidden argument*/Singleton_1_get_Instance_m4098818086_MethodInfo_var);
-		IntPtr_t L_16;
-		L_16.set_m_value_0((void*)(void*)TestSceneManager_EventProgress_m1995119191_MethodInfo_var);
-		Progress_t894445267 * L_17 = (Progress_t894445267 *)il2cpp_codegen_object_new(Progress_t894445267_il2cpp_TypeInfo_var);
-		Progress__ctor_m3967000090(L_17, __this, L_16, /*hidden argument*/NULL);
-		NullCheck(L_15);
-		MobileDownloadManager_add_OnProgress_m427143225(L_15, L_17, /*hidden argument*/NULL);
-		MobileDownloadManager_t2112422693 * L_18 = Singleton_1_get_Instance_m4098818086(NULL /*static, unused*/, /*hidden argument*/Singleton_1_get_Instance_m4098818086_MethodInfo_var);
-		IntPtr_t L_19;
-		L_19.set_m_value_0((void*)(void*)TestSceneManager_EventDownloadSize_m1676891195_MethodInfo_var);
-		Size_t1882781731 * L_20 = (Size_t1882781731 *)il2cpp_codegen_object_new(Size_t1882781731_il2cpp_TypeInfo_var);
-		Size__ctor_m2133379256(L_20, __this, L_19, /*hidden argument*/NULL);
-		NullCheck(L_18);
-		MobileDownloadManager_add_OnSize_m3288751657(L_18, L_20, /*hidden argument*/NULL);
-		int32_t L_21 = Application_get_platform_m3989224144(NULL /*static, unused*/, /*hidden argument*/NULL);
-		if ((!(((uint32_t)L_21) == ((uint32_t)((int32_t)11)))))
+		bool L_5 = MobileDownloadManager_IsWifiOnly_m2699150905(L_4, /*hidden argument*/NULL);
+		__this->set_onlyWifi_11(L_5);
+		Text_t356221433 * L_6 = __this->get_cellularButtonText_5();
+		bool L_7 = __this->get_onlyWifi_11();
+		bool L_8 = L_7;
+		Il2CppObject * L_9 = Box(Boolean_t3825574718_il2cpp_TypeInfo_var, &L_8);
+		String_t* L_10 = String_Concat_m56707527(NULL /*static, unused*/, _stringLiteral610354465, L_9, /*hidden argument*/NULL);
+		NullCheck(L_6);
+		VirtActionInvoker1< String_t* >::Invoke(72 /* System.Void UnityEngine.UI.Text::set_text(System.String) */, L_6, L_10);
+		MobileDownloadManager_t2112422693 * L_11 = Singleton_1_get_Instance_m4098818086(NULL /*static, unused*/, /*hidden argument*/Singleton_1_get_Instance_m4098818086_MethodInfo_var);
+		IntPtr_t L_12;
+		L_12.set_m_value_0((void*)(void*)TestSceneManager_EventDownloaded_m1160529101_MethodInfo_var);
+		Success_t1862374945 * L_13 = (Success_t1862374945 *)il2cpp_codegen_object_new(Success_t1862374945_il2cpp_TypeInfo_var);
+		Success__ctor_m1124332342(L_13, __this, L_12, /*hidden argument*/NULL);
+		NullCheck(L_11);
+		MobileDownloadManager_add_OnSuccess_m446867157(L_11, L_13, /*hidden argument*/NULL);
+		MobileDownloadManager_t2112422693 * L_14 = Singleton_1_get_Instance_m4098818086(NULL /*static, unused*/, /*hidden argument*/Singleton_1_get_Instance_m4098818086_MethodInfo_var);
+		IntPtr_t L_15;
+		L_15.set_m_value_0((void*)(void*)TestSceneManager_EventError_m2730581883_MethodInfo_var);
+		Error_t1232275708 * L_16 = (Error_t1232275708 *)il2cpp_codegen_object_new(Error_t1232275708_il2cpp_TypeInfo_var);
+		Error__ctor_m1685326973(L_16, __this, L_15, /*hidden argument*/NULL);
+		NullCheck(L_14);
+		MobileDownloadManager_add_OnError_m689020021(L_14, L_16, /*hidden argument*/NULL);
+		MobileDownloadManager_t2112422693 * L_17 = Singleton_1_get_Instance_m4098818086(NULL /*static, unused*/, /*hidden argument*/Singleton_1_get_Instance_m4098818086_MethodInfo_var);
+		IntPtr_t L_18;
+		L_18.set_m_value_0((void*)(void*)TestSceneManager_EventProgress_m1995119191_MethodInfo_var);
+		Progress_t894445267 * L_19 = (Progress_t894445267 *)il2cpp_codegen_object_new(Progress_t894445267_il2cpp_TypeInfo_var);
+		Progress__ctor_m3967000090(L_19, __this, L_18, /*hidden argument*/NULL);
+		NullCheck(L_17);
+		MobileDownloadManager_add_OnProgress_m427143225(L_17, L_19, /*hidden argument*/NULL);
+		MobileDownloadManager_t2112422693 * L_20 = Singleton_1_get_Instance_m4098818086(NULL /*static, unused*/, /*hidden argument*/Singleton_1_get_Instance_m4098818086_MethodInfo_var);
+		IntPtr_t L_21;
+		L_21.set_m_value_0((void*)(void*)TestSceneManager_EventDownloadSize_m1676891195_MethodInfo_var);
+		Size_t1882781731 * L_22 = (Size_t1882781731 *)il2cpp_codegen_object_new(Size_t1882781731_il2cpp_TypeInfo_var);
+		Size__ctor_m2133379256(L_22, __this, L_21, /*hidden argument*/NULL);
+		NullCheck(L_20);
+		MobileDownloadManager_add_OnSize_m3288751657(L_20, L_22, /*hidden argument*/NULL);
+		int32_t L_23 = Application_get_platform_m3989224144(NULL /*static, unused*/, /*hidden argument*/NULL);
+		if ((!(((uint32_t)L_23) == ((uint32_t)((int32_t)11)))))
 		{
-			goto IL_00af;
+			goto IL_00c0;
 		}
 	}
 	{
 		TestSceneManager_getAndroidDownloadPath_m119135224(__this, /*hidden argument*/NULL);
 	}
 
-IL_00af:
+IL_00c0:
 	{
 		TestSceneManager_CheckFileStatus_m2957699810(__this, /*hidden argument*/NULL);
 		return;
@@ -552,6 +556,7 @@ extern "C"  void TestSceneManager_LoadFile_m1202468022 (TestSceneManager_t234507
 		s_Il2CppMethodInitialized = true;
 	}
 	int32_t V_0 = 0;
+	StringU5BU5D_t1642385972* V_1 = NULL;
 	{
 		Text_t356221433 * L_0 = __this->get_loadText_6();
 		NullCheck(L_0);
@@ -592,18 +597,26 @@ IL_0027:
 
 IL_0055:
 	{
-		IL2CPP_RUNTIME_CLASS_INIT(Singleton_1_t3288307080_il2cpp_TypeInfo_var);
-		MobileDownloadManager_t2112422693 * L_10 = Singleton_1_get_Instance_m4098818086(NULL /*static, unused*/, /*hidden argument*/Singleton_1_get_Instance_m4098818086_MethodInfo_var);
+		StringU5BU5D_t1642385972* L_10 = ((StringU5BU5D_t1642385972*)SZArrayNew(StringU5BU5D_t1642385972_il2cpp_TypeInfo_var, (uint32_t)1));
 		StringU5BU5D_t1642385972* L_11 = __this->get_urls_12();
 		int32_t L_12 = V_0;
 		NullCheck(L_11);
 		int32_t L_13 = L_12;
 		String_t* L_14 = (L_11)->GetAt(static_cast<il2cpp_array_size_t>(L_13));
 		NullCheck(L_10);
-		MobileDownloadManager_DownloadFile_m2612089116(L_10, L_14, /*hidden argument*/NULL);
-		Text_t356221433 * L_15 = __this->get_actionText_2();
+		ArrayElementTypeCheck (L_10, L_14);
+		(L_10)->SetAt(static_cast<il2cpp_array_size_t>(0), (String_t*)L_14);
+		V_1 = L_10;
+		IL2CPP_RUNTIME_CLASS_INIT(Singleton_1_t3288307080_il2cpp_TypeInfo_var);
+		MobileDownloadManager_t2112422693 * L_15 = Singleton_1_get_Instance_m4098818086(NULL /*static, unused*/, /*hidden argument*/Singleton_1_get_Instance_m4098818086_MethodInfo_var);
+		StringU5BU5D_t1642385972* L_16 = V_1;
+		IL2CPP_RUNTIME_CLASS_INIT(TestSceneManager_t2345075657_il2cpp_TypeInfo_var);
+		String_t* L_17 = ((TestSceneManager_t2345075657_StaticFields*)TestSceneManager_t2345075657_il2cpp_TypeInfo_var->static_fields)->get_notificationMessage_13();
 		NullCheck(L_15);
-		VirtActionInvoker1< String_t* >::Invoke(72 /* System.Void UnityEngine.UI.Text::set_text(System.String) */, L_15, _stringLiteral3403942113);
+		MobileDownloadManager_DownloadFiles_m594375001(L_15, L_16, L_17, /*hidden argument*/NULL);
+		Text_t356221433 * L_18 = __this->get_actionText_2();
+		NullCheck(L_18);
+		VirtActionInvoker1< String_t* >::Invoke(72 /* System.Void UnityEngine.UI.Text::set_text(System.String) */, L_18, _stringLiteral3403942113);
 		return;
 	}
 }
@@ -616,16 +629,15 @@ extern "C"  void TestSceneManager_LoadFiles_m2039305059 (TestSceneManager_t23450
 		il2cpp_codegen_initialize_method (TestSceneManager_LoadFiles_m2039305059_MetadataUsageId);
 		s_Il2CppMethodInitialized = true;
 	}
-	String_t* V_0 = NULL;
 	{
 		Text_t356221433 * L_0 = __this->get_actionText_2();
 		NullCheck(L_0);
 		VirtActionInvoker1< String_t* >::Invoke(72 /* System.Void UnityEngine.UI.Text::set_text(System.String) */, L_0, _stringLiteral2432374328);
-		V_0 = _stringLiteral1576637533;
 		IL2CPP_RUNTIME_CLASS_INIT(Singleton_1_t3288307080_il2cpp_TypeInfo_var);
 		MobileDownloadManager_t2112422693 * L_1 = Singleton_1_get_Instance_m4098818086(NULL /*static, unused*/, /*hidden argument*/Singleton_1_get_Instance_m4098818086_MethodInfo_var);
 		StringU5BU5D_t1642385972* L_2 = __this->get_urls_12();
-		String_t* L_3 = V_0;
+		IL2CPP_RUNTIME_CLASS_INIT(TestSceneManager_t2345075657_il2cpp_TypeInfo_var);
+		String_t* L_3 = ((TestSceneManager_t2345075657_StaticFields*)TestSceneManager_t2345075657_il2cpp_TypeInfo_var->static_fields)->get_notificationMessage_13();
 		NullCheck(L_1);
 		MobileDownloadManager_DownloadFiles_m594375001(L_1, L_2, L_3, /*hidden argument*/NULL);
 		return;
@@ -641,6 +653,7 @@ extern "C"  void TestSceneManager_DeleteFile_m569928435 (TestSceneManager_t23450
 		s_Il2CppMethodInitialized = true;
 	}
 	int32_t V_0 = 0;
+	StringU5BU5D_t1642385972* V_1 = NULL;
 	{
 		Text_t356221433 * L_0 = __this->get_deleteText_7();
 		NullCheck(L_0);
@@ -684,15 +697,21 @@ IL_0055:
 		Text_t356221433 * L_10 = __this->get_actionText_2();
 		NullCheck(L_10);
 		VirtActionInvoker1< String_t* >::Invoke(72 /* System.Void UnityEngine.UI.Text::set_text(System.String) */, L_10, _stringLiteral2360472694);
-		IL2CPP_RUNTIME_CLASS_INIT(Singleton_1_t3288307080_il2cpp_TypeInfo_var);
-		MobileDownloadManager_t2112422693 * L_11 = Singleton_1_get_Instance_m4098818086(NULL /*static, unused*/, /*hidden argument*/Singleton_1_get_Instance_m4098818086_MethodInfo_var);
+		StringU5BU5D_t1642385972* L_11 = ((StringU5BU5D_t1642385972*)SZArrayNew(StringU5BU5D_t1642385972_il2cpp_TypeInfo_var, (uint32_t)1));
 		StringU5BU5D_t1642385972* L_12 = __this->get_urls_12();
 		int32_t L_13 = V_0;
 		NullCheck(L_12);
 		int32_t L_14 = L_13;
 		String_t* L_15 = (L_12)->GetAt(static_cast<il2cpp_array_size_t>(L_14));
 		NullCheck(L_11);
-		MobileDownloadManager_DeleteFile_m3996110199(L_11, L_15, /*hidden argument*/NULL);
+		ArrayElementTypeCheck (L_11, L_15);
+		(L_11)->SetAt(static_cast<il2cpp_array_size_t>(0), (String_t*)L_15);
+		V_1 = L_11;
+		IL2CPP_RUNTIME_CLASS_INIT(Singleton_1_t3288307080_il2cpp_TypeInfo_var);
+		MobileDownloadManager_t2112422693 * L_16 = Singleton_1_get_Instance_m4098818086(NULL /*static, unused*/, /*hidden argument*/Singleton_1_get_Instance_m4098818086_MethodInfo_var);
+		StringU5BU5D_t1642385972* L_17 = V_1;
+		NullCheck(L_16);
+		MobileDownloadManager_DeleteFiles_m3519775302(L_16, L_17, /*hidden argument*/NULL);
 		return;
 	}
 }
@@ -1428,6 +1447,20 @@ extern "C"  void TestSceneManager_EventDownloadSize_m1676891195 (TestSceneManage
 		String_t* L_2 = L_1->get_mSizeMessage_1();
 		NullCheck(L_0);
 		VirtActionInvoker1< String_t* >::Invoke(72 /* System.Void UnityEngine.UI.Text::set_text(System.String) */, L_0, L_2);
+		return;
+	}
+}
+// System.Void TestSceneManager::.cctor()
+extern "C"  void TestSceneManager__cctor_m82001371 (Il2CppObject * __this /* static, unused */, const MethodInfo* method)
+{
+	static bool s_Il2CppMethodInitialized;
+	if (!s_Il2CppMethodInitialized)
+	{
+		il2cpp_codegen_initialize_method (TestSceneManager__cctor_m82001371_MetadataUsageId);
+		s_Il2CppMethodInitialized = true;
+	}
+	{
+		((TestSceneManager_t2345075657_StaticFields*)TestSceneManager_t2345075657_il2cpp_TypeInfo_var->static_fields)->set_notificationMessage_13(_stringLiteral2952165749);
 		return;
 	}
 }

@@ -349,11 +349,12 @@ extern Il2CppClass* Size_t1882781731_il2cpp_TypeInfo_var;
 extern const uint32_t MobileDownloadManager_add_OnSize_m3288751657_MetadataUsageId;
 extern const uint32_t MobileDownloadManager_remove_OnSize_m61480642_MetadataUsageId;
 extern Il2CppCodeGenString* _stringLiteral1774303909;
-extern const uint32_t MobileDownloadManager_Configure_m1148775274_MetadataUsageId;
+extern const uint32_t MobileDownloadManager_Configure_m10068199_MetadataUsageId;
 extern Il2CppCodeGenString* _stringLiteral2003616743;
 extern const uint32_t MobileDownloadManager_DownloadFile_m2612089116_MetadataUsageId;
-extern Il2CppCodeGenString* _stringLiteral2337959284;
+extern Il2CppCodeGenString* _stringLiteral1083251067;
 extern const uint32_t MobileDownloadManager_DownloadFiles_m594375001_MetadataUsageId;
+extern Il2CppCodeGenString* _stringLiteral2337959284;
 extern const uint32_t MobileDownloadManager_DownloadFiles_m2228589411_MetadataUsageId;
 extern Il2CppCodeGenString* _stringLiteral2158498964;
 extern const uint32_t MobileDownloadManager_CheckFileExist_m2212829219_MetadataUsageId;
@@ -845,12 +846,10 @@ extern "C"  Il2CppObject* U3CStringifyAsyncU3Ec__Iterator2_System_Collections_Ge
 extern "C"  Delegate_t3022476291 * Delegate_Combine_m3791207084 (Il2CppObject * __this /* static, unused */, Delegate_t3022476291 * p0, Delegate_t3022476291 * p1, const MethodInfo* method) IL2CPP_METHOD_ATTR;
 // System.Delegate System.Delegate::Remove(System.Delegate,System.Delegate)
 extern "C"  Delegate_t3022476291 * Delegate_Remove_m2626518725 (Il2CppObject * __this /* static, unused */, Delegate_t3022476291 * p0, Delegate_t3022476291 * p1, const MethodInfo* method) IL2CPP_METHOD_ATTR;
-// System.Void MobileDownloadManager::configure(System.Boolean,System.Int32)
-extern "C"  void MobileDownloadManager_configure_m2337203658 (Il2CppObject * __this /* static, unused */, bool ___wifi0, int32_t ___maxConnections1, const MethodInfo* method) IL2CPP_METHOD_ATTR;
-// System.Void MobileDownloadManager::downloadFile(System.String)
-extern "C"  void MobileDownloadManager_downloadFile_m3226981308 (Il2CppObject * __this /* static, unused */, String_t* ___url0, const MethodInfo* method) IL2CPP_METHOD_ATTR;
-// System.Void MobileDownloadManager::downloadFiles(System.String[],System.Int32)
-extern "C"  void MobileDownloadManager_downloadFiles_m294190820 (Il2CppObject * __this /* static, unused */, StringU5BU5D_t1642385972* ___urls0, int32_t ___count1, const MethodInfo* method) IL2CPP_METHOD_ATTR;
+// System.Void MobileDownloadManager::configure(System.Boolean,System.Int32,System.Boolean)
+extern "C"  void MobileDownloadManager_configure_m212629127 (Il2CppObject * __this /* static, unused */, bool ___wifi0, int32_t ___maxConnections1, bool ___isSingleNotifications2, const MethodInfo* method) IL2CPP_METHOD_ATTR;
+// System.Void MobileDownloadManager::downloadFilesWithMessage(System.String[],System.Int32,System.String)
+extern "C"  void MobileDownloadManager_downloadFilesWithMessage_m1523326149 (Il2CppObject * __this /* static, unused */, StringU5BU5D_t1642385972* ___urls0, int32_t ___count1, String_t* ___notificationMessage2, const MethodInfo* method) IL2CPP_METHOD_ATTR;
 // System.Void MobileDownloadManager::checkFileExist(System.String)
 extern "C"  void MobileDownloadManager_checkFileExist_m1844791875 (Il2CppObject * __this /* static, unused */, String_t* ___url0, const MethodInfo* method) IL2CPP_METHOD_ATTR;
 // System.Void MobileDownloadManager::checkFilesExist(System.String[],System.Int32)
@@ -7961,39 +7960,21 @@ IL_0007:
 		return;
 	}
 }
-extern "C" void DEFAULT_CALL configure(int32_t, int32_t);
-// System.Void MobileDownloadManager::configure(System.Boolean,System.Int32)
-extern "C"  void MobileDownloadManager_configure_m2337203658 (Il2CppObject * __this /* static, unused */, bool ___wifi0, int32_t ___maxConnections1, const MethodInfo* method)
+extern "C" void DEFAULT_CALL configure(int32_t, int32_t, int32_t);
+// System.Void MobileDownloadManager::configure(System.Boolean,System.Int32,System.Boolean)
+extern "C"  void MobileDownloadManager_configure_m212629127 (Il2CppObject * __this /* static, unused */, bool ___wifi0, int32_t ___maxConnections1, bool ___isSingleNotifications2, const MethodInfo* method)
 {
-	typedef void (DEFAULT_CALL *PInvokeFunc) (int32_t, int32_t);
+	typedef void (DEFAULT_CALL *PInvokeFunc) (int32_t, int32_t, int32_t);
 
 	// Native function invocation
-	reinterpret_cast<PInvokeFunc>(configure)(static_cast<int32_t>(___wifi0), ___maxConnections1);
+	reinterpret_cast<PInvokeFunc>(configure)(static_cast<int32_t>(___wifi0), ___maxConnections1, static_cast<int32_t>(___isSingleNotifications2));
 
 }
-extern "C" void DEFAULT_CALL downloadFile(char*);
-// System.Void MobileDownloadManager::downloadFile(System.String)
-extern "C"  void MobileDownloadManager_downloadFile_m3226981308 (Il2CppObject * __this /* static, unused */, String_t* ___url0, const MethodInfo* method)
+extern "C" void DEFAULT_CALL downloadFilesWithMessage(char**, int32_t, char*);
+// System.Void MobileDownloadManager::downloadFilesWithMessage(System.String[],System.Int32,System.String)
+extern "C"  void MobileDownloadManager_downloadFilesWithMessage_m1523326149 (Il2CppObject * __this /* static, unused */, StringU5BU5D_t1642385972* ___urls0, int32_t ___count1, String_t* ___notificationMessage2, const MethodInfo* method)
 {
-	typedef void (DEFAULT_CALL *PInvokeFunc) (char*);
-
-	// Marshaling of parameter '___url0' to native representation
-	char* ____url0_marshaled = NULL;
-	____url0_marshaled = il2cpp_codegen_marshal_string(___url0);
-
-	// Native function invocation
-	reinterpret_cast<PInvokeFunc>(downloadFile)(____url0_marshaled);
-
-	// Marshaling cleanup of parameter '___url0' native representation
-	il2cpp_codegen_marshal_free(____url0_marshaled);
-	____url0_marshaled = NULL;
-
-}
-extern "C" void DEFAULT_CALL downloadFiles(char**, int32_t);
-// System.Void MobileDownloadManager::downloadFiles(System.String[],System.Int32)
-extern "C"  void MobileDownloadManager_downloadFiles_m294190820 (Il2CppObject * __this /* static, unused */, StringU5BU5D_t1642385972* ___urls0, int32_t ___count1, const MethodInfo* method)
-{
-	typedef void (DEFAULT_CALL *PInvokeFunc) (char**, int32_t);
+	typedef void (DEFAULT_CALL *PInvokeFunc) (char**, int32_t, char*);
 
 	// Marshaling of parameter '___urls0' to native representation
 	char** ____urls0_marshaled = NULL;
@@ -8012,8 +7993,12 @@ extern "C"  void MobileDownloadManager_downloadFiles_m294190820 (Il2CppObject * 
 		____urls0_marshaled = NULL;
 	}
 
+	// Marshaling of parameter '___notificationMessage2' to native representation
+	char* ____notificationMessage2_marshaled = NULL;
+	____notificationMessage2_marshaled = il2cpp_codegen_marshal_string(___notificationMessage2);
+
 	// Native function invocation
-	reinterpret_cast<PInvokeFunc>(downloadFiles)(____urls0_marshaled, ___count1);
+	reinterpret_cast<PInvokeFunc>(downloadFilesWithMessage)(____urls0_marshaled, ___count1, ____notificationMessage2_marshaled);
 
 	// Marshaling cleanup of parameter '___urls0' native representation
 	if (____urls0_marshaled != NULL)
@@ -8027,6 +8012,10 @@ extern "C"  void MobileDownloadManager_downloadFiles_m294190820 (Il2CppObject * 
 		il2cpp_codegen_marshal_free(____urls0_marshaled);
 		____urls0_marshaled = NULL;
 	}
+
+	// Marshaling cleanup of parameter '___notificationMessage2' native representation
+	il2cpp_codegen_marshal_free(____notificationMessage2_marshaled);
+	____notificationMessage2_marshaled = NULL;
 
 }
 extern "C" void DEFAULT_CALL deleteFile(char*);
@@ -8276,13 +8265,13 @@ extern "C"  void MobileDownloadManager_Init_m3641070174 (MobileDownloadManager_t
 		return;
 	}
 }
-// System.Void MobileDownloadManager::Configure(System.Boolean,System.Int32)
-extern "C"  void MobileDownloadManager_Configure_m1148775274 (MobileDownloadManager_t2112422693 * __this, bool ___wifi0, int32_t ___maxConnections1, const MethodInfo* method)
+// System.Void MobileDownloadManager::Configure(System.Boolean,System.Int32,System.Boolean)
+extern "C"  void MobileDownloadManager_Configure_m10068199 (MobileDownloadManager_t2112422693 * __this, bool ___wifi0, int32_t ___maxConnections1, bool ___isSingleNotifications2, const MethodInfo* method)
 {
 	static bool s_Il2CppMethodInitialized;
 	if (!s_Il2CppMethodInitialized)
 	{
-		il2cpp_codegen_initialize_method (MobileDownloadManager_Configure_m1148775274_MetadataUsageId);
+		il2cpp_codegen_initialize_method (MobileDownloadManager_Configure_m10068199_MetadataUsageId);
 		s_Il2CppMethodInitialized = true;
 	}
 	{
@@ -8290,7 +8279,8 @@ extern "C"  void MobileDownloadManager_Configure_m1148775274 (MobileDownloadMana
 		Debug_Log_m920475918(NULL /*static, unused*/, _stringLiteral1774303909, /*hidden argument*/NULL);
 		bool L_0 = ___wifi0;
 		int32_t L_1 = ___maxConnections1;
-		MobileDownloadManager_configure_m2337203658(NULL /*static, unused*/, L_0, L_1, /*hidden argument*/NULL);
+		bool L_2 = ___isSingleNotifications2;
+		MobileDownloadManager_configure_m212629127(NULL /*static, unused*/, L_0, L_1, L_2, /*hidden argument*/NULL);
 		return;
 	}
 }
@@ -8306,8 +8296,6 @@ extern "C"  void MobileDownloadManager_DownloadFile_m2612089116 (MobileDownloadM
 	{
 		IL2CPP_RUNTIME_CLASS_INIT(Debug_t1368543263_il2cpp_TypeInfo_var);
 		Debug_Log_m920475918(NULL /*static, unused*/, _stringLiteral2003616743, /*hidden argument*/NULL);
-		String_t* L_0 = ___url0;
-		MobileDownloadManager_downloadFile_m3226981308(NULL /*static, unused*/, L_0, /*hidden argument*/NULL);
 		return;
 	}
 }
@@ -8322,11 +8310,12 @@ extern "C"  void MobileDownloadManager_DownloadFiles_m594375001 (MobileDownloadM
 	}
 	{
 		IL2CPP_RUNTIME_CLASS_INIT(Debug_t1368543263_il2cpp_TypeInfo_var);
-		Debug_Log_m920475918(NULL /*static, unused*/, _stringLiteral2337959284, /*hidden argument*/NULL);
+		Debug_Log_m920475918(NULL /*static, unused*/, _stringLiteral1083251067, /*hidden argument*/NULL);
 		StringU5BU5D_t1642385972* L_0 = ___urls0;
 		StringU5BU5D_t1642385972* L_1 = ___urls0;
 		NullCheck(L_1);
-		MobileDownloadManager_downloadFiles_m294190820(NULL /*static, unused*/, L_0, (((int32_t)((int32_t)(((Il2CppArray *)L_1)->max_length)))), /*hidden argument*/NULL);
+		String_t* L_2 = ___notificationMessage1;
+		MobileDownloadManager_downloadFilesWithMessage_m1523326149(NULL /*static, unused*/, L_0, (((int32_t)((int32_t)(((Il2CppArray *)L_1)->max_length)))), L_2, /*hidden argument*/NULL);
 		return;
 	}
 }
@@ -8342,10 +8331,6 @@ extern "C"  void MobileDownloadManager_DownloadFiles_m2228589411 (MobileDownload
 	{
 		IL2CPP_RUNTIME_CLASS_INIT(Debug_t1368543263_il2cpp_TypeInfo_var);
 		Debug_Log_m920475918(NULL /*static, unused*/, _stringLiteral2337959284, /*hidden argument*/NULL);
-		StringU5BU5D_t1642385972* L_0 = ___urls0;
-		StringU5BU5D_t1642385972* L_1 = ___urls0;
-		NullCheck(L_1);
-		MobileDownloadManager_downloadFiles_m294190820(NULL /*static, unused*/, L_0, (((int32_t)((int32_t)(((Il2CppArray *)L_1)->max_length)))), /*hidden argument*/NULL);
 		return;
 	}
 }

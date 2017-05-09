@@ -32,26 +32,31 @@ public class TestSceneManager : MonoBehaviour {
 
 	/* *
 	 * Array with all the urls Strings to be downloaded.
+	 * Remember that the ProgressMessage methods are not being called
+	 * if the url headers are not available.
+	 * Default "www.colocenter.nl" do not support these headers.
 	 * */
-	string[] urls = { 
+	private string[] urls = { 
 		"http://www.colocenter.nl/speedtest/100mb.bin",
 		"http://www.colocenter.nl/speedtest/250mb.bin",
 		"http://www.colocenter.nl/speedtest/500mb.bin" 
 	};
 
+	/* *
+	 * Notifications message string when file is downloaded from url
+	 * */
+	static private string notificationMessage = "Downloads are finished downloading! :)";
+
 	void Start () {
 
-		/* Configure Method calls a instancetype for configuring HTTPMaxConnectionsPerHost and OnlyWifi enabled
-		* @param(integer) for applying the HTTPMaxConnectionsPerHost
-		* @param(bool) for applying the OnlyWifi enabling
-		*/
-		MobileDownloadManager.Instance.Configure (true, 1);
-
+	   	//Configure Method calls a instancetype for configuring HTTPMaxConnectionsPerHost and OnlyWifi enabled
+		MobileDownloadManager.Instance.Configure (true, 1, true);
+		 
 		//Get language of the device.
 		Debug.Log("Locale: " + MobileDownloadManager.Instance.GetCurrentLocale());
 
 		//Get current user (download over wifi) preference .
-//		onlyWifi = MobileDownloadManager.Instance.IsWifiOnly();
+		onlyWifi = MobileDownloadManager.Instance.IsWifiOnly();
 		cellularButtonText.text = "Only over WiFI: " + onlyWifi;
 
 		// Subscribe for different events.
@@ -117,7 +122,9 @@ public class TestSceneManager : MonoBehaviour {
 			return;
 		}
 
-		MobileDownloadManager.Instance.DownloadFile(urls[index]);
+		string [] tempUrls = new string[]  { urls[index] };
+
+		MobileDownloadManager.Instance.DownloadFiles(tempUrls, notificationMessage);
 
 		actionText.text = "LoadFile started";
 	}
@@ -127,10 +134,8 @@ public class TestSceneManager : MonoBehaviour {
 	 * */
 	public void LoadFiles(){
 		actionText.text = "LoadFiles started";
-		// Load file from array of urlsa
 
-		string notificationMessage = "Custom downloaded message";
-		MobileDownloadManager.Instance.DownloadFiles (urls, notificationMessage);
+		MobileDownloadManager.Instance.DownloadFiles(urls, notificationMessage);
 	}
 
 	/* *
@@ -152,7 +157,9 @@ public class TestSceneManager : MonoBehaviour {
 
 		actionText.text = "DeleteFile started";
 
-		MobileDownloadManager.Instance.DeleteFile(urls[index]);
+		string [] tempUrls = new string[]  { urls[index] };
+
+		MobileDownloadManager.Instance.DeleteFiles (tempUrls);
 	}
 
 	/* *
@@ -182,7 +189,7 @@ public class TestSceneManager : MonoBehaviour {
 			actionText.text = "WARNING: Invalid number, use 0...2";
 			return;
 		}
-			
+
 		MobileDownloadManager.Instance.CancelSingleDownload (urls[index]);
 	}
 
@@ -192,7 +199,7 @@ public class TestSceneManager : MonoBehaviour {
 	public void CancelDownloads(){
 		actionText.text = "Canceling Downloads";
 
-		MobileDownloadManager.Instance.CancelDownloads();
+		MobileDownloadManager.Instance.CancelDownloads ();
 	}
 
 	/* *
@@ -222,7 +229,7 @@ public class TestSceneManager : MonoBehaviour {
 	public void PauseDownloads() {
 		actionText.text = "Pausing Downloads";
 
-		MobileDownloadManager.Instance.PauseDownloads ();
+		MobileDownloadManager.Instance.PauseDownloads();
 	}
 
 	/* *
@@ -242,8 +249,8 @@ public class TestSceneManager : MonoBehaviour {
 			actionText.text = "WARNING: Invalid number, use 0...2";
 			return;
 		}
-
-		MobileDownloadManager.Instance.ResumeSingleDownload (urls[index]);
+			
+		MobileDownloadManager.Instance.ResumeSingleDownload(urls[index]);
 	}
 
 	/* *
@@ -252,7 +259,7 @@ public class TestSceneManager : MonoBehaviour {
 	public void ResumeDownloads() {
 		actionText.text = "Resuming Downloads";
 
-		MobileDownloadManager.Instance.ResumeDownloads ();
+		MobileDownloadManager.Instance.ResumeDownloads();
 	}
 
 	/* *
@@ -332,8 +339,8 @@ public class TestSceneManager : MonoBehaviour {
 	}
 
 	/* *
-	 * Event that will be called with information regarding the current size of the array 
-	 * inside the iOS fileDownloads array
+	 * Event that will be called with information about the current downloadURLPaths size of the array 
+	 * inside the iOS Directory
 	 * */
 	void EventDownloadSize(SizeModel size)
 	{
