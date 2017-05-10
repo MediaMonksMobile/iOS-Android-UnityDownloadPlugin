@@ -41,7 +41,7 @@ Delete download:
 - Select iOS as build target
 - Select a target folder with name
 - Xcode will open automatically or open Unity-iPhone.xcodeproj
-- Check Info.plist for <key>UIBackgroundModes</key> key for Local Notifications 
+- Check Info.plist for `<key>UIBackgroundModes</key>` key for Local Notifications 
 - Run Project
 
 ## Updates
