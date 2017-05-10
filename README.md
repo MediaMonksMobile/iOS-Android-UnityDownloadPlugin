@@ -1,15 +1,11 @@
 # Unity Plugin iOS
 
-### IMPORTANT: Still in beta
-
-Some functions will not work properly.
 
 ## General
 
 This application downloads (multiple) data from the NSURLSession iOS plugin.
 The following options are available: 
 
-- 
 - Progress state
 - Change Only over Wifi
 
