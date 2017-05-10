@@ -48,10 +48,10 @@ Delete download:
 
 ### 1.2
 
-#### iOS Plugin
+##### iOS Plugin
 - Refactoring.
 
-#### Unity UI
+##### Unity UI
 - Added progress slider.
 
 ### 1.1
@@ -60,16 +60,16 @@ Delete download:
 - Added Single Notifications;
 - Refactoring.
 
-#### Unity UI
+##### Unity UI
 - Removed unnecessary code.
 
 ### 1.0
 
-#### iOS Plugin
+##### iOS Plugin
 - Fixed Bug for resuming downloadTasksWithData;
 - Added Single Delete/Pause/Cancel/Resume functionalities;
 - Added update amountLabel function with SendMessageToUnity functionality.
 
-#### Unity UI
+##### Unity UI
 - Added Textfield for Delete/Pause/Cancel/Resume functionalities;
 - Added Download amount label.
