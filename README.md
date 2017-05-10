@@ -1,4 +1,4 @@
-# Unity Plugin iOS
+# Unity Plugin iOS/Android
 
 
 ## General
