@@ -4,7 +4,7 @@ using System.Collections;
 public class ErrorModel {
 
 	public enum ErrorType{
-		OTHER = 0,
+		UNKNOWN = 0,
 		NO_INTERNET_CONNECTION = 1,
 		NOT_ENOUGH_SPACE = 2,
 		CANCELED = 3,

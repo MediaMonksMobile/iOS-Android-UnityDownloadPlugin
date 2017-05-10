@@ -37,7 +37,10 @@ public class TestSceneManager : MonoBehaviour {
 	 * Remember that the ProgressMessage methods are not being called
 	 * if the url headers are not available.
 	 * Default "www.colocenter.nl" do not support these headers.
-	 * http://mirror.nl.leaseweb.net/speedtest/1000mb.bin does
+	 * 
+	 * Test url with supported headers:
+	 * http://mirror.nl.leaseweb.net/speedtest/1000mb.bin
+	 * 
 	 * */
 	private string[] urls = { 
 		"http://www.colocenter.nl/speedtest/25mb.bin",

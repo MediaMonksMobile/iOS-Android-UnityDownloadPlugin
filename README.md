@@ -9,6 +9,8 @@ Some functions will not work properly.
 This application downloads (multiple) data from the NSURLSession iOS plugin.
 The following options are available: 
 
+- 
+- Progress state
 - Change Only over Wifi
 
 Download:
@@ -43,6 +45,14 @@ Delete download:
 - Run Project
 
 ## Updates
+
+### 1.2
+
+#### iOS Plugin
+- Refactoring.
+
+#### Unity UI
+- Added progress slider.
 
 ### 1.1
 

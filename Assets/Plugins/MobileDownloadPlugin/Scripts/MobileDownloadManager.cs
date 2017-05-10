@@ -16,6 +16,7 @@ public class MobileDownloadManager : Singleton<MobileDownloadManager>
 	public event Progress OnProgress;
 
 	public event Size OnSize;
+
 	#if UNITY_ANDROID
 	AndroidJavaObject mobileDownloadAndroid;
 	AndroidJavaObject context;

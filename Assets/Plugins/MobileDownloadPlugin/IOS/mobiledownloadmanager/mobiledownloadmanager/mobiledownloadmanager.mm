@@ -24,27 +24,18 @@
 
 static mobiledownloadmanager *globalSelf;
 
+static NSString * const _CELLULAR_KEY = @"com.mediamonks.mobiledownloadmanager.cellularAllowed";
+static NSString * const _URLSESSION_KEY = @"com.mediamonks.mobiledownloadmanager";
+
 typedef id (*IMPPlus)(id, SEL, UIApplication*, NSString*, void (^completionHandler)());
 
 @implementation mobiledownloadmanager
 
-
-/*
-* Default initializer
-* Calls initWithWifi:maxConnections:notifyUserOnce 
-* with default settings
-*/
 - (instancetype)init {
     return [self initWithWifiOnly:true maxConnections:1 notifyUserOnce:true];
 }
 
-/*
-* Custom initializer
-* @params(bool) for applying wifi settings
-* @params(int) for applying the max HTTPMaximumConnectionsPerHost
-* @params(bool) for applying the setting the local notifications per completed download
-*/
-- (instancetype)initWithWifiOnly:(bool)status maxConnections:(int)amount notifyUserOnce:(bool)notifyUserOnce {
+- (instancetype)initWithWifiOnly:(BOOL)wifiOnly maxConnections:(int)maxConnections notifyUserOnce:(BOOL)notifyUserOnce {
 	self = [super init];
 	if (self) {
         
@@ -52,11 +43,11 @@ typedef id (*IMPPlus)(id, SEL, UIApplication*, NSString*, void (^completionHandl
         
         _singleNotification = notifyUserOnce;
 
-        NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:[NSString stringWithFormat:@"com.mediamonks.mobiledownloadmanager"]];
-        sessionConfiguration.HTTPMaximumConnectionsPerHost = amount;
+        NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:_URLSESSION_KEY];
+        sessionConfiguration.HTTPMaximumConnectionsPerHost = maxConnections;
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        sessionConfiguration.allowsCellularAccess = [defaults boolForKey:@"com.mediamonks.mobiledownloadmanager.cellularAllowed"];
+        sessionConfiguration.allowsCellularAccess = [defaults boolForKey:_CELLULAR_KEY];
         
         NSLog(@"mobiledownloadmanager - Allow cellular: %i", sessionConfiguration.allowsCellularAccess);
         
@@ -87,7 +78,6 @@ typedef id (*IMPPlus)(id, SEL, UIApplication*, NSString*, void (^completionHandl
             }
         }];
 	}
-
 	return self;
 }
 
@@ -149,7 +139,7 @@ typedef id (*IMPPlus)(id, SEL, UIApplication*, NSString*, void (^completionHandl
 + (BOOL)allowCellular
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	return [defaults boolForKey:@"com.mediamonks.mobiledownloadmanager.cellularAllowed"];
+    return [defaults boolForKey:_CELLULAR_KEY];
 }
 
 + (void)cancelSingleDownload:(NSString *)url
@@ -244,13 +234,6 @@ typedef id (*IMPPlus)(id, SEL, UIApplication*, NSString*, void (^completionHandl
 
 #pragma mark - Internal methods
 
-/*
-* Checks if the download allready excists in the phones directory and
-* sets a download session on and FileDownloadInfo object with given values.
-* At last it will send a status update to Unity
-* @params(NSString) for applying the given url string
-* @params(NSString) for applying the given notification message string
-*/
 - (void)startDownloadWithURL:(NSString *)url andMessage:(NSString *)message
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -310,13 +293,6 @@ typedef id (*IMPPlus)(id, SEL, UIApplication*, NSString*, void (^completionHandl
     [self.fileDownloads addObject:fdi];
 }
 
-/*
-* Checks if the url excists in the mobiles directory and
-* removes the data in the path with the commen created FileDownloadInfo.
-* At last it will send a status update to UnityUI.
-* @params(NSArray<NSString>) for applying the givens urls in a array
-* @params(NSString) for applying the given notification message string
-*/
 - (void)deleteFileWithNames:(NSArray <NSString *>*)names
 {
 	BOOL success = YES;
@@ -393,13 +369,6 @@ typedef id (*IMPPlus)(id, SEL, UIApplication*, NSString*, void (^completionHandl
 	}
 }
 
-/*
-* Loops through all the download objects and checks if a download session is active.
-* If so, it will compare it with the given @param and pauses and saves the allready 
-* downloaded data in the FileDownloadInfo object for later use.
-* NSURLSession delegate will catch this action and updates UnityUI.
-* @params(NSString) for applying the given url string
-*/
 - (void)pauseSingleDownload:(NSString *)name
 {
     NSLog(@"mobiledownloadmanager - Pause single downloads");
@@ -416,12 +385,6 @@ typedef id (*IMPPlus)(id, SEL, UIApplication*, NSString*, void (^completionHandl
     }
 }
 
-/*
-* Loops through all the download objects and checks if a download session is active.
-* If so, it will pauses and saves the allready downloaded data in 
-* the FileDownloadInfo object for later use.
-* NSURLSession delegate will catch this action and updates UnityUI.
-*/
 - (void)pauseAllDownloads
 {
 	NSLog(@"mobiledownloadmanager - Pause all downloads");
@@ -436,16 +399,9 @@ typedef id (*IMPPlus)(id, SEL, UIApplication*, NSString*, void (^completionHandl
 	}
 }
 
-/*
-* Loops through all the download objects and checks if a download is paused.
-* If so, it will compare it with the @param and resumes the download with the saved data.
-* NSURLSession delegate will catch this action and updates UnityUI.
-* @params(NSString) for applying the given url string
-*/
 - (void)resumeSingleDownload:(NSString *)name
 {
     NSLog(@"resumeSingleDownload: %@", name);
-    
     for (NSUInteger i = 0; i < self.fileDownloads.count; ++i) {
         FileDownloadInfo *fdi = self.fileDownloads[i];
         if ([fdi.downloadURL isEqual:name]){
@@ -482,11 +438,6 @@ typedef id (*IMPPlus)(id, SEL, UIApplication*, NSString*, void (^completionHandl
     }
 }
 
-/*
-* Loops through all the download objects and checks if a download is paused.
-* If so, it will resume the download with the saved data.
-* NSURLSession delegate will catch this action and updates UnityUI.
-*/
 - (void)resumeAllDownloads
 {
 	NSLog(@"mobiledownloadmanager - Resume all downloads");
@@ -524,12 +475,6 @@ typedef id (*IMPPlus)(id, SEL, UIApplication*, NSString*, void (^completionHandl
 	}
 }
 
-/*
-* Loops through all the download objects and compares it with the @param.
-* If so, it will cancel the download without saving the data.
-* NSURLSession delegate will catch this action and updates UnityUI.
-* @params(NSString) for applying the given url string
-*/
 - (void)cancelSingleDownload:(NSString *)name
 {
     NSLog(@"mobiledownloadmanager - Cancel single downloads");
@@ -543,11 +488,6 @@ typedef id (*IMPPlus)(id, SEL, UIApplication*, NSString*, void (^completionHandl
     }
 }
 
-/*
-* Loops through all the download objects.
-* Next, it will cancel all downloads without saving the data.
-* NSURLSession delegate will catch this action and updates UnityUI.
-*/
 - (void)cancelAllDownloads
 {
 	NSLog(@"mobiledownloadmanager - Cancel all downloads");
@@ -558,24 +498,15 @@ typedef id (*IMPPlus)(id, SEL, UIApplication*, NSString*, void (^completionHandl
 	[self.fileDownloads removeAllObjects];
 }
 
-/*
-* Updates the newly created cellularStatus from Unity in UserDefaults
-* @params(BOOL) for applying the given cellular status.
-*/
 - (void)setCellularAllowed:(BOOL)allowed
 {
 	NSLog(@"mobiledownloadmanager - Set cellular allowed to: %i", allowed);
 	[self.session.configuration setAllowsCellularAccess:allowed];
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[defaults setBool:allowed forKey:@"com.mediamonks.mobiledownloadmanager.cellularAllowed"];
+    [defaults setBool:allowed forKey:_CELLULAR_KEY];
 	[defaults synchronize];
 }
 
-/*
-* Checks if the urls excists in the phones directory
-* Depending on the outocme it will send a update to UnityUI.
-* @params(NSArray<NSString>) for applying the given string array.
-*/
 - (void)checkFilesWithNames:(NSArray <NSString *>*)names
 {
 	NSMutableArray *dicArray = [[NSMutableArray alloc] init];
@@ -597,25 +528,19 @@ typedef id (*IMPPlus)(id, SEL, UIApplication*, NSString*, void (^completionHandl
 			[dicArray addObject:JSONDic];
             
 		} else {
+        
 			success = NO;
 		}
 	}
     
     if (dicArray.count != 0) {
         [self getDownloadedFilesLength:dicArray];
-        
-        NSDictionary *JSONDic = @{
-            @"mFilePath": @"NO PATH",
-            @"mFileUrl": @"NO URL"
-        };
-        
-        [dicArray addObject:JSONDic];
     }
 
 	NSString *message;
 
 	if(success) {
-		message = @"Files exist.";
+		message = @"All Files exist.";
 	} else {
 		message = @"(Some) files do not exist.";
 	}
@@ -679,7 +604,7 @@ typedef id (*IMPPlus)(id, SEL, UIApplication*, NSString*, void (^completionHandl
         } else {
             
             [self sendLocalNotification:[NSString stringWithFormat:@"Single download %@ is ready", fdi.downloadURL]];
-            
+
             NSLog(@"mobiledownloadmanager - %@ downloads complete, send local notification.", fdi.downloadURL);
         }
         
@@ -864,8 +789,13 @@ typedef id (*IMPPlus)(id, SEL, UIApplication*, NSString*, void (^completionHandl
 
 #pragma mark - Helpers
 
-//- (NSString)
-
+/**
+ * @discussion  Looks for the correct index by taskIdentifier
+ *
+ * @param taskIdentifier    Identifier from download task
+ *
+ * @retun correct index by identifier
+ */
 - (NSUInteger)getFileDownloadInfoIndexWithTaskIdentifier:(unsigned long)taskIdentifier
 {
 	for (NSUInteger i = 0; i < self.fileDownloads.count; i++) {
@@ -874,10 +804,14 @@ typedef id (*IMPPlus)(id, SEL, UIApplication*, NSString*, void (^completionHandl
 			return i;
 		}
 	}
-
 	return (NSUInteger) -1;
 }
 
+/**
+ * @discussion  Calculates the amount of free space on the device
+ *
+ * @retun Precise value of free space
+ */
 - (float)diskSpace
 {
 	NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -888,11 +822,14 @@ typedef id (*IMPPlus)(id, SEL, UIApplication*, NSString*, void (^completionHandl
 	return free_space;
 }
 
+/**
+ * @discussion  Counts the total size and updates it value to UnityUI.
+ *
+ * @param array Applying the given downloaded urls.
+ */
 -(void)getDownloadedFilesLength:(NSArray *)array
 {
-    
     NSString *sizeMessage = [NSString stringWithFormat:@"Downloads: %lu", (unsigned long)array.count];
-    
     NSInteger sizeState = 0;
     
     if (array.count != 0) {
@@ -916,16 +853,29 @@ typedef id (*IMPPlus)(id, SEL, UIApplication*, NSString*, void (^completionHandl
     [self sendMessageToUnity:"SizeMessage" JSONDataDictionary: JSONData];
 }
 
+/**
+ * @discussion  Counts the total downloaded size and updates it on the UnityUI.
+ *
+ * @param message   Applying the given downloaded urls.
+ */
 - (void)sendLocalNotification:(NSString *)message
 {
     UILocalNotification *notification = [[UILocalNotification alloc] init];
     notification.alertBody = message;
+    notification.soundName = UILocalNotificationDefaultSoundName;
     notification.fireDate = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
     notification.timeZone = [NSTimeZone defaultTimeZone];
     notification.repeatInterval = 0;
     [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
 }
 
+/**
+ * @discussion  Handling the session state of an download session.
+ *
+ * @param   state   State of the URLSessionTask.
+ *
+ * @return  The defined code for handeling state.
+ */
 -(NSInteger)getDownloadState:(NSURLSessionTaskState)state
 {
     switch(state) {
@@ -943,6 +893,13 @@ typedef id (*IMPPlus)(id, SEL, UIApplication*, NSString*, void (^completionHandl
     return 2;
 }
 
+/**
+ * @discussion  Handling the NSURL error codes.
+ *
+ * @param  error    Given error of the NSURLError.
+ *
+ * @return The defined code for handeling error state.
+ */
 -(NSInteger)getErrorMessage:(NSError *)error
 {
     if ([error.domain isEqual:NSURLErrorDomain]) {
@@ -960,13 +917,18 @@ typedef id (*IMPPlus)(id, SEL, UIApplication*, NSString*, void (^completionHandl
             return 7;
         }
     }
-    
-    return -99;
+    return 0;
 }
 
+/**
+ * @discussion  Wrapper for UnitySendMessage handeling data to Unity game object.
+ *
+ * @param methodName           Method name in Unity game object.
+ * @param jsonDataDictionary   Passed data in json format
+ */
 - (void)sendMessageToUnity:(const char *)methodName JSONDataDictionary:(NSDictionary *)jsonDataDictionary {
     
-    const char *gameObj = "MobileDownloadManager";
+    const char *gameObj = "MobileDownloadManager"; // Don't change this!
     
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:jsonDataDictionary options:NSJSONWritingPrettyPrinted error:&error];
