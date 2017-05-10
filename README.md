@@ -29,6 +29,10 @@ Delete download:
 - Single by textfield;
 - All at once.
 
+## Images
+
+![Unity UI](https://raw.githubusercontent.com/MediaMonksMobile/iOSUnityDownloadPlugin/master/Screenshots/UnityUI.PNG)
+
 ## How to use
 
 - Download or Clone project
