@@ -4,30 +4,14 @@
 ## General
 
 This application downloads (multiple) data from the NSURLSession iOS plugin.
-The following options are available: 
+The following options are available within the plugin: 
 
-- Progress state
-- Change Only over Wifi
-
-Download:
-- Single by textfield;
-- All at once.
-
-Pause download:
-- Single by textfield;
-- All at once.
-
-Resume download:
-- Single by textfield;
-- All at once.
-
-Cancel download:
-- Single by textfield;
-- All at once.
-
-Delete download:
-- Single by textfield;
-- All at once.
+- Progress state of a single download
+- Download/Pause/Resume/Cancel/Delete single & multiple sessions
+- Only download on wifi state
+- The amount of downloaded files
+- Set the maximum number of simultaneous connections to each host per task
+- Set a notification per download or when all downloads are completed
 
 ## Images
 
@@ -37,10 +21,10 @@ Delete download:
 
 - Download or Clone project
 - Open Unity
-- Press cmd + B to build the project
+- Press `CMD + B` to build the project
 - Select iOS as build target
 - Select a target folder with name
-- Xcode will open automatically or open Unity-iPhone.xcodeproj
+- Xcode will open automatically or open `Unity-iPhone.xcodeproj`
 - Check Info.plist for `<key>UIBackgroundModes</key>` key for Local Notifications 
 - Run Project
 
