@@ -12,6 +12,7 @@ The following options are available within the plugin:
 - The amount of downloaded files
 - Set the maximum number of simultaneous connections to each host per task
 - Set a notification per download or when all downloads are completed
+- Automatically import need plist items
 
 ## Images
 
@@ -25,10 +26,14 @@ The following options are available within the plugin:
 - Select iOS as build target
 - Select a target folder with name
 - Xcode will open automatically or open `Unity-iPhone.xcodeproj`
-- Check Info.plist for `<key>UIBackgroundModes</key>` key for Local Notifications 
 - Run Project
 
 ## Updates
+
+### 1.3
+
+##### Unity UI
+- Added iOSPluginProjectBuild
 
 ### 1.2
 
